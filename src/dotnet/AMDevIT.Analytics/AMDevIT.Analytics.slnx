@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Elementi di soluzione/">
+    <File Path="../../../AGENTS.md" />
+    <File Path="../../../README.md" />
+    <File Path="../../../RELEASING.md" />
+  </Folder>
+  <Folder Name="/Libraries/" />
+  <Folder Name="/Libraries/Core/">
+    <Project Path="AMDevIT.Analytics.Abstractions/AMDevIT.Analytics.Abstractions.csproj" />
+    <Project Path="AMDevIT.Analytics.Core/AMDevIT.Analytics.Core.csproj" />
+  </Folder>
+  <Folder Name="/Libraries/Firebase/">
+    <Project Path="AMDevIT.Analytics.Firebase.ManagedDroid/AMDevIT.Analytics.Firebase.ManagedDroid.csproj" Id="e5476dfb-8863-4661-96ec-d2425e8815ce" />
+  </Folder>
+</Solution>
