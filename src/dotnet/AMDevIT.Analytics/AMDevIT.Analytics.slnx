@@ -3,6 +3,7 @@
     <File Path="../../../AGENTS.md" />
     <File Path="../../../README.md" />
     <File Path="../../../RELEASING.md" />
+    <File Path="Directory.Build.props" />
   </Folder>
   <Folder Name="/Libraries/" />
   <Folder Name="/Libraries/Core/">

@@ -1,0 +1,35 @@
+<Project>
+  <PropertyGroup>
+    <ArtifactsPath>$(MSBuildThisFileDirectory)..\..\..\artifacts</ArtifactsPath>
+   </PropertyGroup>
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+    <VersionPrefix>0.0.6</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <Version>$(VersionPrefix)$(VersionSuffix)</Version>
+    <Authors>Alessandro Morvillo</Authors>
+    <Company>AMDev.IT di Alessandro Morvillo</Company>
+    <Copyright>Alessandro Morvillo, 2026</Copyright>
+    <PackageTags>ios maccatalyst dotnet</PackageTags>
+    <PackageProjectUrl>https://github.com/AMDevIT/AMDevITAnalytics</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AMDevIT/AMDevITAnalytics.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>nuget_icon_128.png</PackageIcon>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../artifacts/packages</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <Deterministic>true</Deterministic>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <EnablePackageValidation>true</EnablePackageValidation>
+  </PropertyGroup>
+</Project>

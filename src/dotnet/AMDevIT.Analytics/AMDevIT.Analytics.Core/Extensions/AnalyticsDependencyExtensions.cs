@@ -1,19 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AMDevIT.Analytics.Core.Extensions
+namespace AMDevIT.Analytics.Core.Extensions;
+
+public static class AnalyticsDependencyExtensions
 {
-    public static class AnalyticsDependencyExtensions
+    #region Methods
+
+    public static IServiceCollection UseAMDevITAnalytics(this IServiceCollection services)
     {
-        #region Methods
-
-        public static IServiceCollection UseAMDevITAnalytics(this IServiceCollection services)
-        {
-            services.AddSingleton<>
-        }
-
-        #endregion
+        services.AddSingleton<IAnalyticsInstance, AnalyticsInstance>();
+        return services;
     }
+
+    #endregion
 }
