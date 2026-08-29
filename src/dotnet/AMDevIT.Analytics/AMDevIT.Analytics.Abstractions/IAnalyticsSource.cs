@@ -1,8 +1,13 @@
-﻿namespace AMDevIT.Analytics.Abstractions;
+namespace AMDevIT.Analytics.Abstractions;
 
-public interface ICrashEventLoggerSourceInitializer
+public interface IAnalyticsSource
 {
     #region Properties
+
+    Guid InstanceID
+    {
+        get;
+    }
 
     bool IsInitialized
     {

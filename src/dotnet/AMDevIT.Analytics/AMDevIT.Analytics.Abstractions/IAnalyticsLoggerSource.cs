@@ -1,18 +1,12 @@
 ﻿namespace AMDevIT.Analytics.Abstractions;
 
 public interface IAnalyticsLoggerSource
+    : IAnalyticsSource
 {
-    #region Properties
+    #region Methods
 
-    IAnalyticsLoggerSourceInitializer Initializer
-    {
-        get;
-    }
-
-    Guid InstanceID
-    {
-        get;
-    }
+    Task LogEventAsync(AnalyticsEvent analyticsEvent,
+                       CancellationToken cancellationToken = default);
 
     #endregion
 }

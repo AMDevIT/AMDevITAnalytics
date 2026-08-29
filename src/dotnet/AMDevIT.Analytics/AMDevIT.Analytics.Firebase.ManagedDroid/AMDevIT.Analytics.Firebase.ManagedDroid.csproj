@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AMDevIT.Analytics.Abstractions\AMDevIT.Analytics.Abstractions.csproj" />
+    <ProjectReference Include="..\AMDevIT.Analytics.Core\AMDevIT.Analytics.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

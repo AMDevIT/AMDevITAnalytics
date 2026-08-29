@@ -1,18 +1,12 @@
 ﻿namespace AMDevIT.Analytics.Abstractions;
 
 public interface ICrashEventLoggerSource
+    : IAnalyticsSource
 {
-    #region Properties
+    #region Methods
 
-    ICrashEventLoggerSourceInitializer Initializer
-    {
-        get;
-    }
-
-    Guid InstanceID
-    {
-        get;
-    }
+    Task LogErrorAsync(CrashEvent crashEvent,
+                       CancellationToken cancellationToken = default);
 
     #endregion
 }

@@ -1,46 +1,138 @@
-﻿using AMDevIT.Analytics.Abstractions;
-using Firebase.Analytics;
+using AMDevIT.Analytics.Abstractions;
 using AMDevIT.Analytics.Firebase.ManagedDroid.Extensions;
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Firebase.Analytics;
 
-namespace AMDevIT.Analytics.Firebase.ManagedDroid
+namespace AMDevIT.Analytics.Firebase.ManagedDroid;
+
+public sealed class FirebaseAnalyticsLoggerSource
+    : IAnalyticsLoggerSource, IDisposable
 {
-    public partial class FirebaseAnalyticsLoggerSource
-        : IAnalyticsLoggerSource
+    #region Const
+
+    private const string MessageParameter = "message";
+
+    #endregion
+
+    #region Fields
+
+    private readonly Context applicationContext;
+    private readonly SemaphoreSlim initializationLock = new(1, 1);
+    private FirebaseAnalytics? firebaseInstance;
+    private bool disposedValue;
+
+    #endregion
+
+    #region Properties
+
+    public Guid InstanceID
     {
-        #region Properties
+        get;
+    }
 
-        public IAnalyticsLoggerSourceInitializer Initializer => throw new NotImplementedException();
+    public bool IsInitialized => this.firebaseInstance != null && !this.disposedValue;
 
-        public Guid InstanceID => throw new NotImplementedException();
+    #endregion
 
-        #endregion
+    #region .ctor
 
-        #region Methods
+    public FirebaseAnalyticsLoggerSource()
+        : this(Application.Context)
+    {
+    }
 
-        public async Task LogEvent(string eventID, 
-                                   string message, 
-                                   IReadOnlyDictionary<string, object> parameters, 
-                                   CancellationToken cancellationToken = default)
+    public FirebaseAnalyticsLoggerSource(Context context)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+
+        this.applicationContext = context.ApplicationContext ?? context;
+        this.InstanceID = Guid.NewGuid();
+    }
+
+    #endregion
+
+    #region Methods
+
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
+    {
+        this.ThrowIfDisposed();
+
+        if (this.IsInitialized)
         {
-            FirebaseAnalytics? instance;
-            Bundle? parametersBundle = null;
-
-            if (this.Initializer.IsInitialized == true &&
-                this.Initializer is FirebaseAnalyticsLoggerSourceInitializer firebaseAnalyticsLoggerInitializer)
-            {
-                instance = firebaseAnalyticsLoggerInitializer.FirebaseInstance;
-            }
-            else
-                throw new InvalidOperationException("Firebase Analytics not initialized.");
-
-            if (parameters != null)
-            {
-                parametersBundle = parameters.ToBundle();
-            }
-
-            instance?.LogEvent(eventID, parametersBundle);
+            return;
         }
 
-        #endregion
+        await this.initializationLock.WaitAsync(cancellationToken);
+
+        try
+        {
+            this.ThrowIfDisposed();
+            this.firebaseInstance ??= FirebaseAnalytics.GetInstance(this.applicationContext);
+        }
+        finally
+        {
+            this.initializationLock.Release();
+        }
     }
+
+    public async Task LogEventAsync(AnalyticsEvent analyticsEvent,
+                                    CancellationToken cancellationToken = default)
+    {
+        FirebaseAnalytics firebaseInstance;
+        Dictionary<string, object?> parameters;
+        Bundle? parametersBundle;
+
+        ArgumentNullException.ThrowIfNull(analyticsEvent);
+        ArgumentException.ThrowIfNullOrWhiteSpace(analyticsEvent.EventID);
+
+        await this.InitializeAsync(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+
+        firebaseInstance = this.firebaseInstance
+            ?? throw new InvalidOperationException("Firebase Analytics is not initialized.");
+        parameters = analyticsEvent.Parameters == null
+            ? []
+            : new Dictionary<string, object?>(analyticsEvent.Parameters);
+
+        if (!string.IsNullOrWhiteSpace(analyticsEvent.Message) &&
+            !parameters.ContainsKey(MessageParameter))
+        {
+            parameters.Add(MessageParameter, analyticsEvent.Message);
+        }
+
+        parametersBundle = parameters.ToBundle();
+        firebaseInstance.LogEvent(analyticsEvent.EventID, parametersBundle);
+    }
+
+    public void Dispose()
+    {
+        this.Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (this.disposedValue)
+        {
+            return;
+        }
+
+        if (disposing)
+        {
+            this.firebaseInstance?.Dispose();
+            this.firebaseInstance = null;
+            this.initializationLock.Dispose();
+        }
+
+        this.disposedValue = true;
+    }
+
+    private void ThrowIfDisposed()
+    {
+        ObjectDisposedException.ThrowIf(this.disposedValue, this);
+    }
+
+    #endregion
 }
