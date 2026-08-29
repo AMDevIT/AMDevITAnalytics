@@ -38,11 +38,14 @@ public sealed class FirebaseAnalyticsLoggerSource
 
     #region .ctor
 
+    /// <summary>Creates a source using the Android application context.</summary>
     public FirebaseAnalyticsLoggerSource()
         : this(Application.Context)
     {
     }
 
+    /// <summary>Creates a source using the supplied Android context.</summary>
+    /// <param name="context">Context used to initialize Firebase.</param>
     public FirebaseAnalyticsLoggerSource(Context context)
     {
         ArgumentNullException.ThrowIfNull(context);
@@ -55,6 +58,7 @@ public sealed class FirebaseAnalyticsLoggerSource
 
     #region Methods
 
+    /// <inheritdoc />
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         this.ThrowIfDisposed();
@@ -77,6 +81,7 @@ public sealed class FirebaseAnalyticsLoggerSource
         }
     }
 
+    /// <inheritdoc />
     public async Task LogEventAsync(AnalyticsEvent analyticsEvent,
                                     CancellationToken cancellationToken = default)
     {
@@ -106,12 +111,14 @@ public sealed class FirebaseAnalyticsLoggerSource
         firebaseInstance.LogEvent(analyticsEvent.EventID, parametersBundle);
     }
 
+    /// <summary>Releases Firebase and synchronization resources.</summary>
     public void Dispose()
     {
         this.Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>Releases managed resources when disposing.</summary>
     private void Dispose(bool disposing)
     {
         if (this.disposedValue)
@@ -129,6 +136,7 @@ public sealed class FirebaseAnalyticsLoggerSource
         this.disposedValue = true;
     }
 
+    /// <summary>Throws when the source has been disposed.</summary>
     private void ThrowIfDisposed()
     {
         ObjectDisposedException.ThrowIf(this.disposedValue, this);

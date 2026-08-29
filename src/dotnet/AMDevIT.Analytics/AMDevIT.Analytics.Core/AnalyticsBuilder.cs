@@ -15,6 +15,8 @@ public sealed class AnalyticsBuilder
 
     #region .ctor
 
+    /// <summary>Creates a builder over the specified service collection.</summary>
+    /// <param name="services">Service collection being configured.</param>
     internal AnalyticsBuilder(IServiceCollection services)
     {
         this.Services = services;

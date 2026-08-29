@@ -10,6 +10,10 @@ public static class AnalyticsLoggingDependencyExtensions
 {
     #region Methods
 
+    /// <summary>Registers the analytics Microsoft logging provider.</summary>
+    /// <param name="builder">Analytics builder to extend.</param>
+    /// <param name="configure">Optional logging configuration callback.</param>
+    /// <returns>The same builder.</returns>
     public static AnalyticsBuilder AddMicrosoftLogging(this AnalyticsBuilder builder,
                                                        Action<AnalyticsLoggingOptions>? configure = null)
     {

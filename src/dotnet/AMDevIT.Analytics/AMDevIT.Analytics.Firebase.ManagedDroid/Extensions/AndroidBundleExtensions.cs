@@ -6,6 +6,9 @@ internal static class AndroidBundleExtensions
 {
     #region Methods
 
+    /// <summary>Converts analytics parameters to an Android bundle.</summary>
+    /// <param name="dictionary">Parameters to convert.</param>
+    /// <returns>A bundle containing supported values, or <see langword="null"/> when empty.</returns>
     public static Bundle? ToBundle(this IReadOnlyDictionary<string, object?> dictionary)
     {
         Bundle? bundle;
@@ -29,6 +32,7 @@ internal static class AndroidBundleExtensions
         return bundle;
     }
 
+    /// <summary>Adds a supported value to an Android bundle.</summary>
     private static void PutValue(Bundle bundle,
                                  string key,
                                  object? value)

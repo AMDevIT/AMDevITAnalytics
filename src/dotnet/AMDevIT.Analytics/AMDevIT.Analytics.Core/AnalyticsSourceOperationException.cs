@@ -24,6 +24,11 @@ public sealed class AnalyticsSourceOperationException
 
     #region .ctor
 
+    /// <summary>Creates an exception describing a failed source operation.</summary>
+    /// <param name="sourceInstanceID">Failed source instance identifier.</param>
+    /// <param name="sourceType">Failed source type.</param>
+    /// <param name="operation">Operation that failed.</param>
+    /// <param name="innerException">Original provider exception.</param>
     internal AnalyticsSourceOperationException(Guid sourceInstanceID,
                                                 Type sourceType,
                                                 string operation,

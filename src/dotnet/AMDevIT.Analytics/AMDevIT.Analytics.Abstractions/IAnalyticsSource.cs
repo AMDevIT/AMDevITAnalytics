@@ -18,6 +18,8 @@ public interface IAnalyticsSource
 
     #region Methods
 
+    /// <summary>Initializes the analytics source.</summary>
+    /// <param name="cancellationToken">Token used to cancel initialization.</param>
     Task InitializeAsync(CancellationToken cancellationToken = default);
 
     #endregion

@@ -22,6 +22,9 @@ public sealed class AnalyticsInstance
 
     #region .ctor
 
+    /// <summary>Creates an analytics instance for the supplied sources.</summary>
+    /// <param name="analyticsSources">Analytics event sources.</param>
+    /// <param name="crashSources">Crash event sources.</param>
     public AnalyticsInstance(IEnumerable<IAnalyticsLoggerSource>? analyticsSources = null,
                              IEnumerable<ICrashEventLoggerSource>? crashSources = null)
     {
@@ -33,6 +36,7 @@ public sealed class AnalyticsInstance
 
     #region Methods
 
+    /// <inheritdoc />
     public Task InitializeAsync(CancellationToken cancellationToken = default)
     {   
         IReadOnlyCollection<IAnalyticsSource> sources;
@@ -60,6 +64,7 @@ public sealed class AnalyticsInstance
                                          cancellationToken);
     }
 
+    /// <inheritdoc />
     public Task LogEventAsync(AnalyticsEvent analyticsEvent,
                               CancellationToken cancellationToken = default)
     {
@@ -77,6 +82,7 @@ public sealed class AnalyticsInstance
                                          cancellationToken);
     }
 
+    /// <inheritdoc />
     public Task LogEventAsync(string eventID,
                               string? message = null,
                               IReadOnlyDictionary<string, object?>? parameters = null,
@@ -89,6 +95,7 @@ public sealed class AnalyticsInstance
         return this.LogEventAsync(analyticsEvent, cancellationToken);
     }
 
+    /// <inheritdoc />
     public Task LogErrorAsync(CrashEvent crashEvent,
                               CancellationToken cancellationToken = default)
     {
@@ -107,6 +114,7 @@ public sealed class AnalyticsInstance
                                          cancellationToken);
     }
 
+    /// <inheritdoc />
     public Task LogErrorAsync(Exception exception,
                               string eventID,
                               string? message = null,
@@ -121,6 +129,7 @@ public sealed class AnalyticsInstance
         return this.LogErrorAsync(crashEvent, cancellationToken);
     }
 
+    /// <summary>Executes an operation for every source and aggregates failures.</summary>
     private static async Task ExecuteForAllSourcesAsync<TSource>(IReadOnlyCollection<TSource> sources,
                                                                  Func<TSource, Task> operation,
                                                                  string operationName,
@@ -162,6 +171,7 @@ public sealed class AnalyticsInstance
         }
     }
 
+    /// <summary>Executes an operation for one source and enriches provider failures.</summary>
     private static async Task ExecuteForSourceAsync<TSource>(TSource source,
                                                               Func<TSource, Task> operation,
                                                               string operationName,

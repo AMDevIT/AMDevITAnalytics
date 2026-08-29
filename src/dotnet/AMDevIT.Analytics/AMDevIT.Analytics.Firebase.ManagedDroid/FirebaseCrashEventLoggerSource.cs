@@ -29,6 +29,7 @@ public sealed class FirebaseCrashEventLoggerSource
 
     #region .ctor
 
+    /// <summary>Creates a Firebase Crashlytics source.</summary>
     public FirebaseCrashEventLoggerSource()
     {
         this.InstanceID = Guid.NewGuid();
@@ -38,6 +39,7 @@ public sealed class FirebaseCrashEventLoggerSource
 
     #region Methods
 
+    /// <inheritdoc />
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         if (this.IsInitialized)      
@@ -55,6 +57,7 @@ public sealed class FirebaseCrashEventLoggerSource
         }
     }
 
+    /// <inheritdoc />
     public async Task LogErrorAsync(CrashEvent crashEvent,
                                     CancellationToken cancellationToken = default)
     {
@@ -91,6 +94,7 @@ public sealed class FirebaseCrashEventLoggerSource
         firebaseInstance.RecordException(throwable);
     }
 
+    /// <summary>Stores a typed value as a Crashlytics custom key.</summary>
     private static void SetCustomKey(FirebaseCrashlytics firebaseInstance,
                                      string key,
                                      object? value)
@@ -144,6 +148,7 @@ public sealed class FirebaseCrashEventLoggerSource
 
     #region Dispose
 
+    /// <summary>Releases managed resources when disposing.</summary>
     private void Dispose(bool disposing)
     {
         if (!disposedValue)
@@ -158,6 +163,7 @@ public sealed class FirebaseCrashEventLoggerSource
     }
 
 
+    /// <summary>Releases synchronization resources.</summary>
     public void Dispose()
     {
         // Non modificare questo codice. Inserire il codice di pulizia nel metodo 'Dispose(bool disposing)'

@@ -50,6 +50,9 @@ public sealed class AnalyticsLoggerProvider
 
     #region .ctor
 
+    /// <summary>Creates an analytics logger provider.</summary>
+    /// <param name="analyticsInstance">Analytics instance receiving entries.</param>
+    /// <param name="optionsAccessor">Provider configuration.</param>
     public AnalyticsLoggerProvider(IAnalyticsInstance analyticsInstance,
                                    IOptions<AnalyticsLoggingOptions> optionsAccessor)
     {
@@ -78,6 +81,9 @@ public sealed class AnalyticsLoggerProvider
 
     #region Methods
 
+    /// <summary>Creates or retrieves a category logger.</summary>
+    /// <param name="categoryName">Logger category.</param>
+    /// <returns>The category logger.</returns>
     public ILogger CreateLogger(string categoryName)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(categoryName);
@@ -86,6 +92,7 @@ public sealed class AnalyticsLoggerProvider
                                      category => new AnalyticsLogger(category, this));
     }
 
+    /// <summary>Stops processing and flushes queued entries.</summary>
     public void Dispose()
     {
         if (Interlocked.Exchange(ref this.disposedValue, 1) != 0)
@@ -113,6 +120,7 @@ public sealed class AnalyticsLoggerProvider
         }
     }
 
+    /// <summary>Asynchronously stops processing and flushes queued entries.</summary>
     public async ValueTask DisposeAsync()
     {
         if (Interlocked.Exchange(ref this.disposedValue, 1) != 0)
@@ -144,6 +152,8 @@ public sealed class AnalyticsLoggerProvider
         }
     }
 
+    /// <summary>Sets the external scope provider.</summary>
+    /// <param name="scopeProvider">Scope provider to use.</param>
     public void SetScopeProvider(IExternalScopeProvider scopeProvider)
     {
         ArgumentNullException.ThrowIfNull(scopeProvider);
@@ -209,6 +219,7 @@ public sealed class AnalyticsLoggerProvider
         }
     }
 
+    /// <summary>Determines whether a category and level are enabled.</summary>
     internal bool IsEnabled(string category,
                             LogLevel logLevel)
     {
@@ -228,6 +239,7 @@ public sealed class AnalyticsLoggerProvider
         return !excluded;
     }
 
+    /// <summary>Builds the analytics event identifier for a log event.</summary>
     private static string GetAnalyticsEventID(EventId eventID,
                                               bool isExplicitAnalyticsEvent,
                                               string eventNamePrefix)
@@ -252,6 +264,7 @@ public sealed class AnalyticsLoggerProvider
             : $"logger_{eventID.Id}";
     }
 
+    /// <summary>Determines whether an event explicitly targets analytics.</summary>
     private static bool IsExplicitAnalyticsEvent(EventId eventID,
                                                  string eventNamePrefix)
     {
@@ -260,6 +273,7 @@ public sealed class AnalyticsLoggerProvider
                                         StringComparison.Ordinal) == true;
     }
 
+    /// <summary>Truncates a log message to the configured limit.</summary>
     private static string? NormalizeMessage(string message,
                                             int maximumLength)
     {
@@ -273,6 +287,7 @@ public sealed class AnalyticsLoggerProvider
             : message[..maximumLength];
     }
 
+    /// <summary>Converts a parameter value to a supported scalar representation.</summary>
     private static object? NormalizeParameterValue(object? value)
     {
         return value switch
@@ -287,6 +302,7 @@ public sealed class AnalyticsLoggerProvider
         };
     }
 
+    /// <summary>Validates provider options.</summary>
     private static void ValidateOptions(AnalyticsLoggingOptions options)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(options.QueueCapacity);
@@ -301,6 +317,7 @@ public sealed class AnalyticsLoggerProvider
         }
     }
 
+    /// <summary>Creates parameters from state, metadata and scopes.</summary>
     private Dictionary<string, object?> CreateParameters<TState>(string category,
                                                                   LogLevel logLevel,
                                                                   EventId eventID,
@@ -343,6 +360,7 @@ public sealed class AnalyticsLoggerProvider
         return parameters;
     }
 
+    /// <summary>Copies structured or scalar state into a parameter dictionary.</summary>
     private void CopyStateParameters(Dictionary<string, object?> parameters,
                                      object? state,
                                      string? prefix)
@@ -389,6 +407,7 @@ public sealed class AnalyticsLoggerProvider
                              state);
     }
 
+    /// <summary>Dispatches one queued entry to configured destinations.</summary>
     private async Task ProcessEntryAsync(AnalyticsLogEntry entry,
                                          CancellationToken cancellationToken)
     {
@@ -424,6 +443,7 @@ public sealed class AnalyticsLoggerProvider
         }
     }
 
+    /// <summary>Consumes queued entries until disposal or cancellation.</summary>
     private async Task ProcessQueueAsync()
     {
         CancellationToken cancellationToken = this.processingCancellation.Token;
@@ -444,12 +464,14 @@ public sealed class AnalyticsLoggerProvider
         }
     }
 
+    /// <summary>Records a provider processing failure.</summary>
     private void RecordFailure(Exception exception)
     {
         this.lastException = exception;
         Interlocked.Increment(ref this.failedEntryCount);
     }
 
+    /// <summary>Adds a normalized parameter within configured limits.</summary>
     private void TryAddParameter(Dictionary<string, object?> parameters,
                                  string key,
                                  object? value)
