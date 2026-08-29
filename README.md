@@ -43,3 +43,35 @@ AnalyticsInstance analyticsInstance = new(analyticsSources: [firebaseAnalytics],
 Provider-specific configuration belongs to the provider registration or source constructor. Runtime dependencies,
 such as a current platform activity, should be supplied through provider-specific accessor services rather than the
 core initialization API.
+
+## Microsoft.Extensions.Logging bridge
+
+The optional logging provider forwards selected `ILogger` entries to the registered analytics sources:
+
+```csharp
+services.AddAMDevITAnalytics()
+        .AddFirebase()
+        .AddMicrosoftLogging(options =>
+        {
+            options.MinimumLevel = LogLevel.Information;
+            options.SendExceptionsToCrashReporting = true;
+            options.SendRegularLogsToAnalytics = false;
+            options.QueueCapacity = 256;
+        });
+```
+
+By default, exceptions are forwarded to crash-reporting sources. Regular log entries are forwarded to analytics only
+when their `EventId.Name` starts with `Analytics.`:
+
+```csharp
+logger.LogInformation(new EventId(1001, "Analytics.checkout_completed"),
+                      "Checkout completed for product {ProductID}",
+                      productID);
+```
+
+The prefix is removed before dispatch, producing the analytics event name `checkout_completed`. Structured logging
+properties, category, log level, numeric event ID, and optionally scopes are materialized as event parameters.
+
+`ILogger.Log` remains synchronous and non-blocking. Entries are copied into a bounded in-memory queue and processed
+asynchronously. New entries are dropped when the queue is full, while provider failures are isolated from the calling
+application. Categories beginning with `AMDevIT.Analytics` are excluded by default to prevent logging recursion.
