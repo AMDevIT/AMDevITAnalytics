@@ -4,16 +4,19 @@ using Firebase.Crashlytics;
 namespace AMDevIT.Analytics.Firebase.ManagedDroid;
 
 public sealed class FirebaseCrashEventLoggerSource
-    : ICrashEventLoggerSource
+    : ICrashEventLoggerSource, IDisposable
 {
     #region Fields
 
     private readonly SemaphoreSlim initializationLock = new(1, 1);
     private FirebaseCrashlytics? firebaseInstance;
+    private bool disposedValue;
 
     #endregion
 
     #region Properties
+
+    public bool Disposed => this.disposedValue;
 
     public Guid InstanceID
     {
@@ -37,10 +40,8 @@ public sealed class FirebaseCrashEventLoggerSource
 
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
-        if (this.IsInitialized)
-        {
-            return;
-        }
+        if (this.IsInitialized)      
+            return;      
 
         await this.initializationLock.WaitAsync(cancellationToken);
 
@@ -67,8 +68,7 @@ public sealed class FirebaseCrashEventLoggerSource
         await this.InitializeAsync(cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
 
-        firebaseInstance = this.firebaseInstance
-            ?? throw new InvalidOperationException("Firebase Crashlytics is not initialized.");
+        firebaseInstance = this.firebaseInstance ?? throw new InvalidOperationException("Firebase Crashlytics is not initialized.");
 
         firebaseInstance.Log(crashEvent.EventID);
 
@@ -141,6 +141,31 @@ public sealed class FirebaseCrashEventLoggerSource
                 break;
         }
     }
+
+    #region Dispose
+
+    private void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                this.initializationLock.Dispose();
+            }
+
+            disposedValue = true;
+        }
+    }
+
+
+    public void Dispose()
+    {
+        // Non modificare questo codice. Inserire il codice di pulizia nel metodo 'Dispose(bool disposing)'
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
+    #endregion
 
     #endregion
 }

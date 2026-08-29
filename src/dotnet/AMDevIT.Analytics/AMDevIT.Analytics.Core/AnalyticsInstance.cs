@@ -34,12 +34,25 @@ public sealed class AnalyticsInstance
     #region Methods
 
     public Task InitializeAsync(CancellationToken cancellationToken = default)
-    {
-        IReadOnlyCollection<IAnalyticsSource> sources = this.analyticsSources
-            .Cast<IAnalyticsSource>()
-            .Concat(this.crashSources)
-            .Distinct(ReferenceEqualityComparer.Instance)
-            .ToArray();
+    {   
+        IReadOnlyCollection<IAnalyticsSource> sources;
+        // List<IAnalyticsSource> concatenatedInstances = [];
+
+        //foreach (IAnalyticsSource currentSource in this.analyticsSources)
+        //{
+        //    concatenatedInstances.Add(currentSource);
+        //}
+
+        //foreach (IAnalyticsSource currentSource in this.crashSources)
+        //{
+        //    concatenatedInstances.Add(currentSource);
+        //}
+
+        // sources = concatenatedInstances.Distinct<IAnalyticsSource>(ReferenceEqualityComparer.Instance).ToArray();
+
+      sources = [.. this.analyticsSources.Cast<IAnalyticsSource>()
+                                         .Concat(this.crashSources)
+                                         .Distinct<IAnalyticsSource>(ReferenceEqualityComparer.Instance)];
 
         return ExecuteForAllSourcesAsync(sources,
                                          source => source.InitializeAsync(cancellationToken),

@@ -18,18 +18,16 @@ public static class FirebaseAnalyticsDependencyExtensions
 
     public static AnalyticsBuilder AddFirebaseAnalytics(this AnalyticsBuilder builder)
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IAnalyticsLoggerSource,
-                                        FirebaseAnalyticsLoggerSource>());
+        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IAnalyticsLoggerSource,
+                                          FirebaseAnalyticsLoggerSource>());
 
         return builder;
     }
 
     public static AnalyticsBuilder AddFirebaseCrashlytics(this AnalyticsBuilder builder)
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<ICrashEventLoggerSource,
-                                        FirebaseCrashEventLoggerSource>());
+        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ICrashEventLoggerSource,
+                                          FirebaseCrashEventLoggerSource>());
 
         return builder;
     }

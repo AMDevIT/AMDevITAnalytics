@@ -6,6 +6,9 @@
     <File Path="Directory.Build.props" />
   </Folder>
   <Folder Name="/Libraries/" />
+  <Folder Name="/Libraries/Bindings/">
+    <Project Path="AMDevIT.Analytics.Firebase.BindingApple/AMDevIT.Analytics.Firebase.BindingApple.csproj" Id="28be7232-dfd3-47dd-a89a-7b0b312f5295" />
+  </Folder>
   <Folder Name="/Libraries/Core/">
     <Project Path="AMDevIT.Analytics.Abstractions/AMDevIT.Analytics.Abstractions.csproj" />
     <Project Path="AMDevIT.Analytics.Core/AMDevIT.Analytics.Core.csproj" />
@@ -14,6 +17,7 @@
     <Project Path="AMDevIT.Analytics.Microsoft.Extensions.Logging/AMDevIT.Analytics.Microsoft.Extensions.Logging.csproj" Id="7d7b0be5-26a2-47ce-986e-a21da404f53a" />
   </Folder>
   <Folder Name="/Libraries/Firebase/">
+    <Project Path="AMDevIT.Analytics.Firebase.ManagedApple/AMDevIT.Analytics.Firebase.ManagedApple.csproj" Id="2999fe4f-c6d2-493f-87ae-07d7519733ca" />
     <Project Path="AMDevIT.Analytics.Firebase.ManagedDroid/AMDevIT.Analytics.Firebase.ManagedDroid.csproj" Id="e5476dfb-8863-4661-96ec-d2425e8815ce" />
   </Folder>
 </Solution>
