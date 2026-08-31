@@ -1,5 +1,21 @@
 # Progressive context
 
+## Current step: Managed Apple Firebase implementation (2026-08-31)
+
+- Objective/status: implemented the iOS managed adapter over BindingApple; static review is complete. Restore,
+  build, linking, and runtime tests were explicitly excluded by the user.
+- Decisions: shared idempotent Firebase startup with explicit host-adoption mode; lazy manager creation; serialized
+  native access/disposal; typed Foundation parameter conversion; managed Crashlytics stack frames; full native
+  Analytics and Crashlytics control surface; DI registration matching Android.
+- Affected files: Firebase.ManagedApple source/project files, README.md, this context, and
+  managed-apple-implementation.md.
+- Checks: fetch/upstream 0/0; reviewed generated binding signatures and Foundation reference metadata; parsed project
+  XML; reviewed ownership, cancellation, concurrency, disposal, API coverage, and whitespace.
+- Open issues/next: build and validate on macOS/iOS when authorized, including native packaging/linking, callbacks,
+  parameter types, symbolication, trimming, privacy resources, signing, dSYMs, and host Firebase coexistence.
+
+See managed-apple-implementation.md for the complete scope and limitations.
+
 ## Current step: managed API XML documentation warnings (2026-08-31)
 
 - Objective/status: added missing XML documentation for all members identified by the supplied 77 CS1591 warnings (68 distinct diagnostics; Core is repeated for two targets). Compilation remains unverified.

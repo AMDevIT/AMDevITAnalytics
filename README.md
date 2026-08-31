@@ -14,7 +14,7 @@ The repository currently declares version **0.0.6**. This is the source version,
 | `AMDevIT.Analytics.Core` | `net10.0`, `net10.0-ios`, `net10.0-android` | Provider orchestration, dependency injection, and aggregated failures. |
 | `AMDevIT.Analytics.Firebase.ManagedDroid` | `net10.0-android` | Implemented Firebase Analytics and Crashlytics sources, with combined or separate DI registrations. |
 | `AMDevIT.Analytics.Firebase.BindingApple` | `net10.0-ios` | Low-level binding to the bundled native Apple wrapper. Binding compilation has been checked; native linking and app runtime integration still need validation. |
-| `AMDevIT.Analytics.Firebase.ManagedApple` | `net10.0-ios` | **Incomplete.** Source methods still throw `NotImplementedException`; this is not a usable managed Firebase provider yet. |
+| `AMDevIT.Analytics.Firebase.ManagedApple` | `net10.0-ios` | Managed Analytics and Crashlytics sources over the Apple binding. Native linking and device runtime validation are still required. |
 | `AMDevIT.Analytics.Microsoft.Extensions.Logging` | `net10.0` | Optional queued `ILoggerProvider` that forwards selected logs and exceptions. |
 
 The native Apple build scripts support iOS device, iOS Simulator, and Mac Catalyst archives. The .NET Apple projects currently target **iOS only**, not `net10.0-maccatalyst`. Do not infer managed Mac Catalyst support from the native wrapper.
@@ -176,11 +176,28 @@ Keep vendor configuration in provider-specific options or constructors. Supply m
 
 ## Apple integration
 
-The Swift wrapper exposes Firebase initialization, Analytics events, user properties, collection and consent controls, session information, and Crashlytics recording and report controls. The binding projects these native APIs into .NET; the managed adapter remains unfinished.
+The Swift wrapper exposes Firebase initialization, Analytics events, user properties, collection and consent controls, session information, and Crashlytics recording and report controls. The binding projects these native APIs into .NET, and `Firebase.ManagedApple` provides managed sources and dependency-injection extensions.
+
+Configure the default Firebase app once on the main thread during application startup, before any source can initialize on a background thread:
+
+```csharp
+using AMDevIT.Analytics.Core.Extensions;
+using AMDevIT.Analytics.Firebase.ManagedApple;
+using AMDevIT.Analytics.Firebase.ManagedApple.Extensions;
+
+FirebaseApple.Initialize();
+
+services.AddAMDevITAnalytics()
+        .AddFirebase();
+```
+
+`FirebaseApple.Initialize()` reads `GoogleService-Info.plist` through the native Firebase SDK. If the host or another integration has already configured the default app, call `FirebaseApple.Initialize(useExistingApp: true)` instead. The managed binding cannot discover that external state, so choosing the correct mode remains the host's responsibility.
+
+`FirebaseAnalyticsLoggerSource` accepts strings, finite numbers, booleans, and Firebase's `items` collection. `FirebaseCrashEventLoggerSource` converts managed stack traces to the native exception model and exposes collection and pending-report controls. Crash custom keys are persistent Firebase context and can therefore affect later reports.
 
 See the [Apple build guide](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/src/apple/AmDEVFirebaseAnalytics/BUILDING.md) for XCFramework generation, Objective Sharpie extraction, prerequisites, and integration caveats. The checked-in Xcode project currently uses an iOS 26.5 deployment target; verify it against your supported devices before release.
 
-Native dependency and resource packaging, privacy manifests, signing, initialization lifecycle, host symbol uploads, and device/Release validation remain release work. Successful binding compilation alone does not establish a working Firebase app integration.
+Native dependency and resource packaging, privacy manifests, signing, initialization ownership with other Firebase integrations, host symbol uploads, and device/Release validation remain release work. Successful binding compilation alone does not establish a working Firebase app integration.
 
 ## Repository layout
 
@@ -199,7 +216,7 @@ All package projects share the root README and `assets/icons/nuget_icon_128.png`
 
 NuGet supports PNG/JPEG package icons up to 1 MB and recommends 128 × 128 pixels. See the [NuGet icon and README reference](https://learn.microsoft.com/en-us/nuget/reference/nuspec#icon). Asset details and generation provenance are documented in `assets/icons/README.md`.
 
-Before publishing, restore and build the intended projects with their platform workloads, inspect the resulting `.nupkg` for the README, icon, and dependencies, and validate the host application. Do not publish `ManagedApple` as a functional provider while its implementation is incomplete. Updating these assets does not validate or publish a package.
+Before publishing, restore and build the intended projects with their platform workloads, inspect the resulting `.nupkg` for the README, icon, binding, and native dependencies, and validate the host application on a device. Updating these assets does not validate or publish a package.
 
 ## License
 
