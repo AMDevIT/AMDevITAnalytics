@@ -1,6 +1,14 @@
 # Progressive context
 
-## Current step: iOS binding XML documentation (2026-08-31)
+## Current step: README and NuGet icons (2026-08-31)
+
+- Objective/status: updated README.md and generated package icons in assets/icons; added shared README/icon pack items. No build or publication performed.
+- Decisions: English README, accurate package/platform status, explicit ManagedApple limitations, shared original icon in 128/256/512-pixel PNG variants.
+- Affected files: README.md, assets/icons/*, src/dotnet/AMDevIT.Analytics/Directory.Build.props, this file, and readme-nuget-icons.md.
+- Checks: fetch succeeded (upstream 0/0); source/examples reviewed; PNG dimensions, file sizes, and appearance inspected; props XML and asset paths checked; git diff --check passed.
+- Open issues/next: authorized restore/build/pack and nupkg inspection; Apple runtime/native packaging and unfinished managed provider remain separate tasks. See readme-nuget-icons.md.
+
+## Previous step: iOS binding XML documentation (2026-08-31)
 
 - Objective/status: completed the explicitly requested build and missing XML comments
   for the Apple binding. Final build: zero warnings, zero errors.
