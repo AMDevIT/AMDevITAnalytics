@@ -41,7 +41,7 @@
 	<key>DTXcodeBuild</key>
 	<string>17F113</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>26.5</string>
+	<string>12.5</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
