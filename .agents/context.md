@@ -1,6 +1,19 @@
 # Progressive context
 
-## Current step: iOS binding compilation (2026-08-31)
+## Current step: iOS binding XML documentation (2026-08-31)
+
+- Objective/status: completed the explicitly requested build and missing XML comments
+  for the Apple binding. Final build: zero warnings, zero errors.
+- Decisions: document the binding definitions and consent enum in English; preserve
+  signatures and selectors; allow the SDK to propagate comments into generated code.
+- Affected files: BindingApple/ApiDefinition.cs, BindingApple/StructsAndEnums.cs,
+  this context, and apple-binding-xml-documentation.md.
+- Checks: restore succeeded; initial build had 36 CS1591 warnings; subsequent build
+  had none. Output XML contains 51 members with summaries. Diff whitespace reviewed.
+- Next: optional native linking/runtime validation in an iOS host app on macOS.
+  See apple-binding-xml-documentation.md for scope and verification details.
+
+## Previous step: iOS binding compilation (2026-08-31)
 
 - Objective/status: removed a stale namespace import and three unresolved Sharpie
   Verify annotations from BindingApple/ApiDefinition.cs. Build success is unverified.
