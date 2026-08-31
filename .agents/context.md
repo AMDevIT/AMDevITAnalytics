@@ -1,6 +1,14 @@
 # Progressive context
 
-## Current step: README and NuGet icons (2026-08-31)
+## Current step: managed API XML documentation warnings (2026-08-31)
+
+- Objective/status: added missing XML documentation for all members identified by the supplied 77 CS1591 warnings (68 distinct diagnostics; Core is repeated for two targets). Compilation remains unverified.
+- Decisions: English XML summaries and record parameter documentation; inherited contract comments for Apple members, with explicit NotImplementedException documentation. No API, implementation, build setting, or warning suppression changes.
+- Affected files: 16 C# files across Abstractions, Core, Firebase.ManagedApple, and Microsoft.Extensions.Logging; this context and managed-api-xml-documentation.md.
+- Checks: fetch succeeded and branch matched upstream; working tree initially clean. Manually reviewed comments against source and the supplied diagnostics; source diff contains only XML comment additions.
+- Open issues/next: explicit restore/build approval was requested separately and remains pending. Validate the solution when approved; incomplete Apple provider behavior is unchanged.
+
+## Previous step: README and NuGet icons (2026-08-31)
 
 - Objective/status: updated README.md and generated package icons in assets/icons; added shared README/icon pack items. No build or publication performed.
 - Decisions: English README, accurate package/platform status, explicit ManagedApple limitations, shared original icon in 128/256/512-pixel PNG variants.

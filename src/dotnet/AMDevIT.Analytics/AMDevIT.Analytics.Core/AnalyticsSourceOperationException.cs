@@ -1,20 +1,24 @@
 namespace AMDevIT.Analytics.Core;
 
+/// <summary>Identifies a failed provider operation and retains its original exception.</summary>
 public sealed class AnalyticsSourceOperationException
     : Exception
 {
     #region Properties
 
+    /// <summary>Gets the identifier of the source instance whose operation failed.</summary>
     public Guid SourceInstanceID
     {
         get;
     }
 
+    /// <summary>Gets the runtime type of the source whose operation failed.</summary>
     public Type SourceType
     {
         get;
     }
 
+    /// <summary>Gets the name of the operation that failed.</summary>
     public string Operation
     {
         get;

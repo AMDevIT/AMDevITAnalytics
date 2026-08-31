@@ -2,6 +2,7 @@ using AMDevIT.Analytics.Abstractions;
 
 namespace AMDevIT.Analytics.Core;
 
+/// <summary>Defines initialization and event reporting across registered analytics and crash sources.</summary>
 public interface IAnalyticsInstance
 {
     #region Methods
