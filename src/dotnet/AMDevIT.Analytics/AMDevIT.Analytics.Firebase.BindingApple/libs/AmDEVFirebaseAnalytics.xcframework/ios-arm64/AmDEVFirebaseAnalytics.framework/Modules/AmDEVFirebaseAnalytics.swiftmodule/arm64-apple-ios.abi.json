@@ -1,0 +1,1878 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "AmDEVFirebaseAnalytics",
+    "printedName": "AmDEVFirebaseAnalytics",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnalyticsConsentStatus",
+        "printedName": "AnalyticsConsentStatus",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "unchanged",
+            "printedName": "unchanged",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AmDEVFirebaseAnalytics.AnalyticsConsentStatus.Type) -> AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnalyticsConsentStatus",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                    "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnalyticsConsentStatus",
+                        "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                        "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus@AnalyticsConsentStatusUnchanged",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO9unchangedyA2CmF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "RawDocComment",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 0
+          },
+          {
+            "kind": "Var",
+            "name": "granted",
+            "printedName": "granted",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AmDEVFirebaseAnalytics.AnalyticsConsentStatus.Type) -> AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnalyticsConsentStatus",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                    "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnalyticsConsentStatus",
+                        "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                        "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus@AnalyticsConsentStatusGranted",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO7grantedyA2CmF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "RawDocComment",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 1
+          },
+          {
+            "kind": "Var",
+            "name": "denied",
+            "printedName": "denied",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AmDEVFirebaseAnalytics.AnalyticsConsentStatus.Type) -> AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnalyticsConsentStatus",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                    "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnalyticsConsentStatus",
+                        "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                        "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus@AnalyticsConsentStatusDenied",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO6deniedyA2CmF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "RawDocComment",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 2
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnalyticsConsentStatus",
+                    "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                    "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:22AmDEVFirebaseAnalytics0C13ConsentStatusO8rawValueACSgSi_tcfc",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO8rawValueACSgSi_tcfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:22AmDEVFirebaseAnalytics0C13ConsentStatusO8rawValueSivp",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO8rawValueSivp",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AmDEVFirebaseAnalytics0C13ConsentStatusO8rawValueSivg",
+                "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO8rawValueSivg",
+                "moduleName": "AmDEVFirebaseAnalytics",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus",
+        "mangledName": "$s22AmDEVFirebaseAnalytics0C13ConsentStatusO",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "FirebaseAnalytics",
+        "printedName": "FirebaseAnalytics",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnalyticsManager",
+        "printedName": "AnalyticsManager",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "logEvent",
+            "printedName": "logEvent(name:parameters:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)logEventWithName:parameters:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC8logEvent4name10parametersySS_SDySSypGSgtF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "logEventWithName:parameters:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setUserID",
+            "printedName": "setUserID(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)setUserID:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC9setUserIDyySSSgF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setUserProperty",
+            "printedName": "setUserProperty(_:forName:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)setUserProperty:forName:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC15setUserProperty_7forNameySSSg_SStF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setAnalyticsCollectionEnabled",
+            "printedName": "setAnalyticsCollectionEnabled(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)setAnalyticsCollectionEnabled:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC03setC17CollectionEnabledyySbF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setConsent",
+            "printedName": "setConsent(analyticsStorage:adStorage:adUserData:adPersonalization:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnalyticsConsentStatus",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "hasDefaultArg": true,
+                "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnalyticsConsentStatus",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "hasDefaultArg": true,
+                "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnalyticsConsentStatus",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "hasDefaultArg": true,
+                "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnalyticsConsentStatus",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsConsentStatus",
+                "hasDefaultArg": true,
+                "usr": "c:@M@AmDEVFirebaseAnalytics@E@AnalyticsConsentStatus"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)setConsentWithAnalyticsStorage:adStorage:adUserData:adPersonalization:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC10setConsent16analyticsStorage02adH00I8UserData0I15PersonalizationyAA0cF6StatusO_A3JtF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "setConsentWithAnalyticsStorage:adStorage:adUserData:adPersonalization:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setDefaultEventParameters",
+            "printedName": "setDefaultEventParameters(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)setDefaultEventParameters:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC25setDefaultEventParametersyySDySSypGSgF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "resetAnalyticsData",
+            "printedName": "resetAnalyticsData()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)resetAnalyticsData",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC05resetC4DatayyF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setSessionTimeoutInterval",
+            "printedName": "setSessionTimeoutInterval(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)setSessionTimeoutInterval:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC25setSessionTimeoutIntervalyySdF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "sessionID",
+            "printedName": "sessionID(completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.NSNumber?, Foundation.NSError?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Foundation.NSNumber?, Foundation.NSError?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.NSNumber?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "NSNumber",
+                            "printedName": "Foundation.NSNumber",
+                            "usr": "c:objc(cs)NSNumber"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.NSError?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "NSError",
+                            "printedName": "Foundation.NSError",
+                            "usr": "c:objc(cs)NSError"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)sessionIDWithCompletion:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC9sessionID10completionyySo8NSNumberCSg_So7NSErrorCSgtc_tF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "sessionIDWithCompletion:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "appInstanceID",
+            "printedName": "appInstanceID()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)appInstanceID",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC13appInstanceIDSSSgyF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnalyticsManager",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsManager",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)init",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerCACycfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager",
+        "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerC",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "FirebaseCrashlytics",
+        "printedName": "FirebaseCrashlytics",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "CrashlyticsManager",
+        "printedName": "CrashlyticsManager",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "log",
+            "printedName": "log(message:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)logWithMessage:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC3log7messageySS_tF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "logWithMessage:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "record",
+            "printedName": "record(error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSError",
+                "printedName": "Foundation.NSError",
+                "usr": "c:objc(cs)NSError"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)recordWithError:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC6record5errorySo7NSErrorC_tF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "recordWithError:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "record",
+            "printedName": "record(error:userInfo:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSError",
+                "printedName": "Foundation.NSError",
+                "usr": "c:objc(cs)NSError"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)recordWithError:userInfo:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC6record5error8userInfoySo7NSErrorC_SDySSypGSgtF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "recordWithError:userInfo:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "recordException",
+            "printedName": "recordException(name:reason:stackTrace:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[AmDEVFirebaseAnalytics.CrashlyticsStackFrame]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CrashlyticsStackFrame",
+                    "printedName": "AmDEVFirebaseAnalytics.CrashlyticsStackFrame",
+                    "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)recordExceptionWithName:reason:stackTrace:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC15recordException4name6reason10stackTraceySS_SSSayAA0D10StackFrameCGtF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "recordExceptionWithName:reason:stackTrace:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setCustomValue",
+            "printedName": "setCustomValue(_:forKey:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)setCustomValue:forKey:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC14setCustomValue_6forKeyyypSg_SStF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setCustomKeysAndValues",
+            "printedName": "setCustomKeysAndValues(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)setCustomKeysAndValues:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC22setCustomKeysAndValuesyySDySSypGF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setUserID",
+            "printedName": "setUserID(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)setUserID:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC9setUserIDyySSSgF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setCrashlyticsCollectionEnabled",
+            "printedName": "setCrashlyticsCollectionEnabled(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)setCrashlyticsCollectionEnabled:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC03setD17CollectionEnabledyySbF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isCrashlyticsCollectionEnabled",
+            "printedName": "isCrashlyticsCollectionEnabled()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)isCrashlyticsCollectionEnabled",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC02isD17CollectionEnabledSbyF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "didCrashDuringPreviousExecution",
+            "printedName": "didCrashDuringPreviousExecution()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)didCrashDuringPreviousExecution",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC31didCrashDuringPreviousExecutionSbyF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "checkForUnsentReports",
+            "printedName": "checkForUnsentReports(completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Bool) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)checkForUnsentReportsWithCompletion:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC21checkForUnsentReports10completionyySbc_tF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "checkForUnsentReportsWithCompletion:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "sendUnsentReports",
+            "printedName": "sendUnsentReports()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)sendUnsentReports",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC17sendUnsentReportsyyF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deleteUnsentReports",
+            "printedName": "deleteUnsentReports()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)deleteUnsentReports",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC19deleteUnsentReportsyyF",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CrashlyticsManager",
+                "printedName": "AmDEVFirebaseAnalytics.CrashlyticsManager",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)init",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerCACycfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager",
+        "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerC",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "CrashlyticsStackFrame",
+        "printedName": "CrashlyticsStackFrame",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "symbol",
+            "printedName": "symbol",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(py)symbol",
+            "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC6symbolSSvp",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(im)symbol",
+                "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC6symbolSSvg",
+                "moduleName": "AmDEVFirebaseAnalytics",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "file",
+            "printedName": "file",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(py)file",
+            "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC4fileSSvp",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(im)file",
+                "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC4fileSSvg",
+                "moduleName": "AmDEVFirebaseAnalytics",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "line",
+            "printedName": "line",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(py)line",
+            "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC4lineSivp",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(im)line",
+                "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC4lineSivg",
+                "moduleName": "AmDEVFirebaseAnalytics",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(symbol:file:line:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CrashlyticsStackFrame",
+                "printedName": "AmDEVFirebaseAnalytics.CrashlyticsStackFrame",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(im)initWithSymbol:file:line:",
+            "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC6symbol4file4lineACSS_SSSitcfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "objc_name": "initWithSymbol:file:line:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CrashlyticsStackFrame",
+                "printedName": "AmDEVFirebaseAnalytics.CrashlyticsStackFrame",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame(im)init",
+            "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameCACycfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsStackFrame",
+        "mangledName": "$s22AmDEVFirebaseAnalytics21CrashlyticsStackFrameC",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "FirebaseCore",
+        "printedName": "FirebaseCore",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "FirebaseCoreManager",
+        "printedName": "FirebaseCoreManager",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "initializeFirebase",
+            "printedName": "initializeFirebase()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)FirebaseCoreManager(cm)initializeFirebase",
+            "mangledName": "$s22AmDEVFirebaseAnalytics19FirebaseCoreManagerC010initializeD0yyFZ",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FirebaseCoreManager",
+                "printedName": "AmDEVFirebaseAnalytics.FirebaseCoreManager",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)FirebaseCoreManager"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)FirebaseCoreManager(im)init",
+            "mangledName": "$s22AmDEVFirebaseAnalytics19FirebaseCoreManagerCACycfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)FirebaseCoreManager",
+        "mangledName": "$s22AmDEVFirebaseAnalytics19FirebaseCoreManagerC",
+        "moduleName": "AmDEVFirebaseAnalytics",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITAnalytics\/src\/apple\/AmDEVFirebaseAnalytics\/AmDEVFirebaseAnalytics\/AnalyticsConsentStatus.swift",
+      "kind": "IntegerLiteral",
+      "offset": 225,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITAnalytics\/src\/apple\/AmDEVFirebaseAnalytics\/AmDEVFirebaseAnalytics\/AnalyticsConsentStatus.swift",
+      "kind": "IntegerLiteral",
+      "offset": 296,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITAnalytics\/src\/apple\/AmDEVFirebaseAnalytics\/AmDEVFirebaseAnalytics\/AnalyticsConsentStatus.swift",
+      "kind": "IntegerLiteral",
+      "offset": 366,
+      "length": 1,
+      "value": "2"
+    }
+  ]
+}

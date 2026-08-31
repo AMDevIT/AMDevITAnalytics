@@ -1,70 +1,140 @@
-namespace AMDevIT.Analytics.Firebase.BindingApple
-{
+using System;
+using AmDEVFirebaseAnalytics;
+using Foundation;
+using ObjCRuntime;
 
-    // The first step to creating a binding is to add your native framework ("MyLibrary.xcframework")
-    // to the project.
-    // Open your binding csproj and add a section like this
-    // <ItemGroup>
-    //   <NativeReference Include="MyLibrary.xcframework">
-    //     <Kind>Framework</Kind>
-    //     <Frameworks></Frameworks>
-    //   </NativeReference>
-    // </ItemGroup>
-    //
-    // Once you've added it, you will need to customize it for your specific library:
-    //  - Change the Include to the correct path/name of your library
-    //  - Change Kind to Static (.a) or Framework (.framework/.xcframework) based upon the library kind and extension.
-    //    - Dynamic (.dylib) is a third option but rarely if ever valid, and only on macOS and Mac Catalyst
-    //  - If your library depends on other frameworks, add them inside <Frameworks></Frameworks>
-    // Example:
-    // <NativeReference Include="libs\MyTestFramework.xcframework">
-    //   <Kind>Framework</Kind>
-    //   <Frameworks>CoreLocation ModelIO</Frameworks>
-    // </NativeReference>
-    // 
-    // Once you've done that, you're ready to move on to binding the API...
-    //
-    // Here is where you'd define your API definition for the native Objective-C library.
-    //
-    // For example, to bind the following Objective-C class:
-    //
-    //     @interface Widget : NSObject {
-    //     }
-    //
-    // The C# binding would look like this:
-    //
-    //     [BaseType (typeof (NSObject))]
-    //     interface Widget {
-    //     }
-    //
-    // To bind Objective-C properties, such as:
-    //
-    //     @property (nonatomic, readwrite, assign) CGPoint center;
-    //
-    // You would add a property definition in the C# interface like so:
-    //
-    //     [Export ("center")]
-    //     CGPoint Center { get; set; }
-    //
-    // To bind an Objective-C method, such as:
-    //
-    //     -(void) doSomething:(NSObject *)object atIndex:(NSInteger)index;
-    //
-    // You would add a method definition to the C# interface like so:
-    //
-    //     [Export ("doSomething:atIndex:")]
-    //     void DoSomething (NSObject object, nint index);
-    //
-    // Objective-C "constructors" such as:
-    //
-    //     -(id)initWithElmo:(ElmoMuppet *)elmo;
-    //
-    // Can be bound as:
-    //
-    //     [Export ("initWithElmo:")]
-    //     NativeHandle Constructor (ElmoMuppet elmo);
-    //
-    // For more information, see https://aka.ms/ios-binding
-    //
+namespace AMDevIT.Analytics.Firebase.BindingApple {
+	// @interface AnalyticsManager : NSObject
+	[BaseType (typeof (NSObject), Name = "_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")]
+	interface AnalyticsManager {
+		// -(void)logEventWithName:(NSString * _Nonnull)name parameters:(NSDictionary<NSString *,id> * _Nullable)parameters;
+		[Export ("logEventWithName:parameters:")]
+		void LogEventWithName (string name, [NullAllowed] NSDictionary<NSString, NSObject> parameters);
 
+		// -(void)setUserID:(NSString * _Nullable)userID;
+		[Export ("setUserID:")]
+		void SetUserID ([NullAllowed] string userID);
+
+		// -(void)setUserProperty:(NSString * _Nullable)value forName:(NSString * _Nonnull)name;
+		[Export ("setUserProperty:forName:")]
+		void SetUserProperty ([NullAllowed] string value, string name);
+
+		// -(void)setAnalyticsCollectionEnabled:(BOOL)enabled;
+		[Export ("setAnalyticsCollectionEnabled:")]
+		void SetAnalyticsCollectionEnabled (bool enabled);
+
+		// -(void)setConsentWithAnalyticsStorage:(enum AnalyticsConsentStatus)analyticsStorage adStorage:(enum AnalyticsConsentStatus)adStorage adUserData:(enum AnalyticsConsentStatus)adUserData adPersonalization:(enum AnalyticsConsentStatus)adPersonalization;
+		[Export ("setConsentWithAnalyticsStorage:adStorage:adUserData:adPersonalization:")]
+		void SetConsentWithAnalyticsStorage (AnalyticsConsentStatus analyticsStorage, AnalyticsConsentStatus adStorage, AnalyticsConsentStatus adUserData, AnalyticsConsentStatus adPersonalization);
+
+		// -(void)setDefaultEventParameters:(NSDictionary<NSString *,id> * _Nullable)parameters;
+		[Export ("setDefaultEventParameters:")]
+		void SetDefaultEventParameters ([NullAllowed] NSDictionary<NSString, NSObject> parameters);
+
+		// -(void)resetAnalyticsData;
+		[Export ("resetAnalyticsData")]
+		void ResetAnalyticsData ();
+
+		// -(void)setSessionTimeoutInterval:(NSTimeInterval)interval;
+		[Export ("setSessionTimeoutInterval:")]
+		void SetSessionTimeoutInterval (double interval);
+
+		// -(void)sessionIDWithCompletion:(void (^ _Nonnull)(NSNumber * _Nullable, NSError * _Nullable))completion;
+		[Export ("sessionIDWithCompletion:")]
+		void SessionIDWithCompletion (Action<NSNumber, NSError> completion);
+
+		// -(NSString * _Nullable)appInstanceID __attribute__((warn_unused_result("")));
+		[NullAllowed, Export ("appInstanceID")]
+		[Verify (MethodToProperty)]
+		string AppInstanceID { get; }
+	}
+
+	// @interface CrashlyticsManager : NSObject
+	[BaseType (typeof (NSObject), Name = "_TtC22AmDEVFirebaseAnalytics18CrashlyticsManager")]
+	interface CrashlyticsManager {
+		// -(void)logWithMessage:(NSString * _Nonnull)message;
+		[Export ("logWithMessage:")]
+		void LogWithMessage (string message);
+
+		// -(void)recordWithError:(NSError * _Nonnull)error;
+		[Export ("recordWithError:")]
+		void RecordWithError (NSError error);
+
+		// -(void)recordWithError:(NSError * _Nonnull)error userInfo:(NSDictionary<NSString *,id> * _Nullable)userInfo;
+		[Export ("recordWithError:userInfo:")]
+		void RecordWithError (NSError error, [NullAllowed] NSDictionary<NSString, NSObject> userInfo);
+
+		// -(void)recordExceptionWithName:(NSString * _Nonnull)name reason:(NSString * _Nonnull)reason stackTrace:(NSArray<CrashlyticsStackFrame *> * _Nonnull)stackTrace;
+		[Export ("recordExceptionWithName:reason:stackTrace:")]
+		void RecordExceptionWithName (string name, string reason, CrashlyticsStackFrame [] stackTrace);
+
+		// -(void)setCustomValue:(id _Nullable)value forKey:(NSString * _Nonnull)key;
+		[Export ("setCustomValue:forKey:")]
+		void SetCustomValue ([NullAllowed] NSObject value, string key);
+
+		// -(void)setCustomKeysAndValues:(NSDictionary<NSString *,id> * _Nonnull)values;
+		[Export ("setCustomKeysAndValues:")]
+		void SetCustomKeysAndValues (NSDictionary<NSString, NSObject> values);
+
+		// -(void)setUserID:(NSString * _Nullable)userID;
+		[Export ("setUserID:")]
+		void SetUserID ([NullAllowed] string userID);
+
+		// -(void)setCrashlyticsCollectionEnabled:(BOOL)enabled;
+		[Export ("setCrashlyticsCollectionEnabled:")]
+		void SetCrashlyticsCollectionEnabled (bool enabled);
+
+		// -(BOOL)isCrashlyticsCollectionEnabled __attribute__((warn_unused_result("")));
+		[Export ("isCrashlyticsCollectionEnabled")]
+		[Verify (MethodToProperty)]
+		bool IsCrashlyticsCollectionEnabled { get; }
+
+		// -(BOOL)didCrashDuringPreviousExecution __attribute__((warn_unused_result("")));
+		[Export ("didCrashDuringPreviousExecution")]
+		[Verify (MethodToProperty)]
+		bool DidCrashDuringPreviousExecution { get; }
+
+		// -(void)checkForUnsentReportsWithCompletion:(void (^ _Nonnull)(BOOL))completion;
+		[Export ("checkForUnsentReportsWithCompletion:")]
+		void CheckForUnsentReportsWithCompletion (Action<bool> completion);
+
+		// -(void)sendUnsentReports;
+		[Export ("sendUnsentReports")]
+		void SendUnsentReports ();
+
+		// -(void)deleteUnsentReports;
+		[Export ("deleteUnsentReports")]
+		void DeleteUnsentReports ();
+	}
+
+	// @interface CrashlyticsStackFrame : NSObject
+	[BaseType (typeof (NSObject), Name = "_TtC22AmDEVFirebaseAnalytics21CrashlyticsStackFrame")]
+	[DisableDefaultCtor]
+	interface CrashlyticsStackFrame {
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull symbol;
+		[Export ("symbol")]
+		string Symbol { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull file;
+		[Export ("file")]
+		string File { get; }
+
+		// @property (readonly, nonatomic) NSInteger line;
+		[Export ("line")]
+		nint Line { get; }
+
+		// -(instancetype _Nonnull)initWithSymbol:(NSString * _Nonnull)symbol file:(NSString * _Nonnull)file line:(NSInteger)line __attribute__((objc_designated_initializer));
+		[Export ("initWithSymbol:file:line:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string symbol, string file, nint line);
+	}
+
+	// @interface FirebaseCoreManager : NSObject
+	[BaseType (typeof (NSObject), Name = "_TtC22AmDEVFirebaseAnalytics19FirebaseCoreManager")]
+	interface FirebaseCoreManager {
+		// +(void)initializeFirebase;
+		[Static]
+		[Export ("initializeFirebase")]
+		void InitializeFirebase ();
+	}
 }
