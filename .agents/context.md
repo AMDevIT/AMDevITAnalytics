@@ -1,5 +1,38 @@
 # Progressive context
 
+## Current step: Apple build scripts (2026-08-31)
+
+- Objective/status: corrected the reviewed XCFramework and Sharpie scripts, added Catalyst
+  archiving and dSYM packaging, and aligned Xcode settings. Source changes are complete;
+  execution and generated-binding validation are pending approval and macOS/Xcode.
+- Decisions: script-relative paths, controlled output replacement, retained logs/archives,
+  pinned package resolution, optional preinstalled xcpretty, and cache-independent Sharpie
+  input with explicit optional dependency paths. iOS 26.5 remains unchanged.
+- Affected files: the two Apple shell scripts, project.pbxproj, DocC overview, new BUILDING.md,
+  local .gitattributes/.gitignore, and progressive context. See apple-build-scripts.md.
+- Checks: fetch succeeded and HEAD matched origin/main; manual source/diff and documentation
+  review only. No build, restore, automated checks, tests, or Sharpie execution.
+- Open issues/next step: authorize macOS execution and validate generated bindings. NuGet
+  dependency/resource packaging, .NET Catalyst targeting, signing, host symbol uploads,
+  and initialization safety remain separate work.
+
+## Previous step: Apple native API expansion (2026-08-31)
+
+- Objective/status: added the requested Firebase Analytics and Crashlytics APIs, including
+  optional session and pending-report operations. Implementation is complete; builds/tests
+  are pending approval and macOS/Xcode.
+- Decisions: Objective-C-compatible Foundation types, callback-based asynchronous APIs,
+  an explicit consent enum, and a stack-frame DTO; no .NET contract or Xcode setting changes.
+- Affected files: AnalyticsManager.swift, CrashlyticsManager.swift, new AnalyticsConsentStatus.swift
+  and CrashlyticsStackFrame.swift, and the Apple DocC overview. See apple-native-api.md.
+- Checks: fetch succeeded; the local branch has no upstream but matched origin/main. Reviewed
+  official API references and manually inspected edited sources and documentation formatting.
+  No restore, build, automated verification, or runtime tests were executed.
+- Open issues/next step: validate on macOS with approval, then address initialization safety,
+  Objective-C header export, deployment/platform choices, and the .NET binding/packaging.
+
+## Earlier .NET work
+
 ## Objective and status
 
 Implement the provider-source architecture and the optional Microsoft.Extensions.Logging bridge agreed with the
