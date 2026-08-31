@@ -1,6 +1,18 @@
 # Progressive context
 
-## Current step: Apple build scripts (2026-08-31)
+## Current step: iOS binding compilation (2026-08-31)
+
+- Objective/status: removed a stale namespace import and three unresolved Sharpie
+  Verify annotations from BindingApple/ApiDefinition.cs. Build success is unverified.
+- Decisions: retained native selectors and read-only properties after inspecting the
+  bundled Objective-C header; no native artifact or project-setting changes.
+- Affected files: ApiDefinition.cs, this file, and apple-binding-build.md.
+- Checks: fetch succeeded, branch aligned with upstream (0/0), source/header/diff
+  reviewed manually. No restore, build, or automated checks without explicit approval.
+- Next: approved compilation in a suitable environment and the reported build log
+  if errors persist. See apple-binding-build.md for details and limitations.
+
+## Previous step: Apple build scripts (2026-08-31)
 
 - Objective/status: corrected the reviewed XCFramework and Sharpie scripts, added Catalyst
   archiving and dSYM packaging, and aligned Xcode settings. Source changes are complete;

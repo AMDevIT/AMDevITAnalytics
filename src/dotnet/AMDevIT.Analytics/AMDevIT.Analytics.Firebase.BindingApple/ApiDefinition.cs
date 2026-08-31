@@ -1,5 +1,4 @@
 using System;
-using AmDEVFirebaseAnalytics;
 using Foundation;
 using ObjCRuntime;
 
@@ -45,7 +44,6 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(NSString * _Nullable)appInstanceID __attribute__((warn_unused_result("")));
 		[NullAllowed, Export ("appInstanceID")]
-		[Verify (MethodToProperty)]
 		string AppInstanceID { get; }
 	}
 
@@ -86,12 +84,10 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(BOOL)isCrashlyticsCollectionEnabled __attribute__((warn_unused_result("")));
 		[Export ("isCrashlyticsCollectionEnabled")]
-		[Verify (MethodToProperty)]
 		bool IsCrashlyticsCollectionEnabled { get; }
 
 		// -(BOOL)didCrashDuringPreviousExecution __attribute__((warn_unused_result("")));
 		[Export ("didCrashDuringPreviousExecution")]
-		[Verify (MethodToProperty)]
 		bool DidCrashDuringPreviousExecution { get; }
 
 		// -(void)checkForUnsentReportsWithCompletion:(void (^ _Nonnull)(BOOL))completion;
