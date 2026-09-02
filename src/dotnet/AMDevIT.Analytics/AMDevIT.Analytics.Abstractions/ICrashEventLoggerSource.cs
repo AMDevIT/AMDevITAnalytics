@@ -1,5 +1,6 @@
 ﻿namespace AMDevIT.Analytics.Abstractions;
 
+/// <summary>Defines a provider source that initializes and reports crash events.</summary>
 public interface ICrashEventLoggerSource
     : IAnalyticsSource
 {

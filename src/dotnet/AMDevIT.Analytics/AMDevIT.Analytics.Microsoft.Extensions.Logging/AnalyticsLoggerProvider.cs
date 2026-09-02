@@ -7,6 +7,7 @@ using System.Threading.Channels;
 
 namespace AMDevIT.Analytics.Microsoft.Extensions.Logging;
 
+/// <summary>Queues selected log entries for asynchronous analytics and crash reporting.</summary>
 public sealed class AnalyticsLoggerProvider
     : ILoggerProvider, ISupportExternalScope, IAsyncDisposable
 {
@@ -38,10 +39,14 @@ public sealed class AnalyticsLoggerProvider
 
     #region Properties
 
+    /// <summary>Gets the number of entries rejected because the queue was full or closed.</summary>
     public long DroppedEntryCount => Interlocked.Read(ref this.droppedEntryCount);
 
+    /// <summary>Gets the number of failures recorded while dispatching entries or processing the queue.</summary>
+    /// <remarks>An entry sent to both destinations can produce more than one failure.</remarks>
     public long FailedEntryCount => Interlocked.Read(ref this.failedEntryCount);
 
+    /// <summary>Gets the most recently recorded processing exception, or <see langword="null"/> if none was recorded.</summary>
     public Exception? LastException => this.lastException;
 
     internal IExternalScopeProvider ScopeProvider => this.scopeProvider;

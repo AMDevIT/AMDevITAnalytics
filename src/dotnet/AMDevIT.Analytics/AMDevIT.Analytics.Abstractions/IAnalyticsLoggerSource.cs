@@ -1,5 +1,6 @@
 ﻿namespace AMDevIT.Analytics.Abstractions;
 
+/// <summary>Defines a provider source that initializes and records analytics events.</summary>
 public interface IAnalyticsLoggerSource
     : IAnalyticsSource
 {

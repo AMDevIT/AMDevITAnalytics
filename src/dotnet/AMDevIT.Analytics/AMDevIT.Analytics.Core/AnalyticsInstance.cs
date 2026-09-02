@@ -2,6 +2,8 @@ using AMDevIT.Analytics.Abstractions;
 
 namespace AMDevIT.Analytics.Core;
 
+/// <summary>Initializes registered analytics and crash sources and dispatches events to them.</summary>
+/// <remarks>Source failures are collected and reported in an <see cref="AggregateException"/>.</remarks>
 public sealed class AnalyticsInstance
     : IAnalyticsInstance
 {

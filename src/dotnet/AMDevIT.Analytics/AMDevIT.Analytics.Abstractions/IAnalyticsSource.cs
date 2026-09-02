@@ -1,14 +1,17 @@
 namespace AMDevIT.Analytics.Abstractions;
 
+/// <summary>Defines the identity and initialization lifecycle shared by analytics and crash sources.</summary>
 public interface IAnalyticsSource
 {
     #region Properties
 
+    /// <summary>Gets the identifier of this source instance.</summary>
     Guid InstanceID
     {
         get;
     }
 
+    /// <summary>Gets whether this source has completed initialization.</summary>
     bool IsInitialized
     {
         get;

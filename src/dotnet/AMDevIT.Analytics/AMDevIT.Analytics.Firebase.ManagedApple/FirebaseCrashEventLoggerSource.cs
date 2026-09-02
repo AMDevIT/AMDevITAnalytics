@@ -1,63 +1,193 @@
-﻿using AMDevIT.Analytics.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using AMDevIT.Analytics.Abstractions;
+using AMDevIT.Analytics.Firebase.BindingApple;
+using Foundation;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace AMDevIT.Analytics.Firebase.ManagedApple;
 
-public sealed class FirebaseCrashEventLoggerSource
-    : ICrashEventLoggerSource, IDisposable
+/// <summary>Records managed exceptions and exposes Apple Firebase Crashlytics controls.</summary>
+/// <remarks>Call <see cref="FirebaseApple.Initialize"/> at application startup before background use.</remarks>
+public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, IDisposable
 {
     #region Fields
 
-    private bool disposedValue;
-    private readonly SemaphoreSlim initializationLock = new(1, 1);
+    private readonly FirebaseAppleSource<CrashlyticsManager> source = new();
 
     #endregion
 
     #region Properties
 
-    public Guid InstanceID => throw new NotImplementedException();
+    /// <summary>Gets whether this source has been disposed.</summary>
+    public bool Disposed => this.source.Disposed;
 
-    public bool IsInitialized => throw new NotImplementedException();
+    /// <inheritdoc />
+    public Guid InstanceID { get; } = Guid.NewGuid();
+
+    /// <inheritdoc />
+    public bool IsInitialized => this.source.IsInitialized;
+
+    /// <summary>Gets Firebase's current automatic report collection setting.</summary>
+    public bool IsCrashlyticsCollectionEnabled => this.source.Read(manager => manager.IsCrashlyticsCollectionEnabled);
+
+    /// <summary>Gets whether Crashlytics detected a crash during the previous execution.</summary>
+    public bool DidCrashDuringPreviousExecution => this.source.Read(manager => manager.DidCrashDuringPreviousExecution);
 
     #endregion
 
     #region Methods
 
-    public Task LogErrorAsync(CrashEvent crashEvent, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
+    /// <inheritdoc />
     public Task InitializeAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        this.source.Initialize(cancellationToken);
+        return Task.CompletedTask;
     }
 
-    #region Dispose
-
-    private void Dispose(bool disposing)
+    /// <inheritdoc />
+    /// <remarks>Event metadata is stored as Crashlytics custom keys and can affect later reports.</remarks>
+    public Task LogErrorAsync(CrashEvent crashEvent, CancellationToken cancellationToken = default)
     {
-        if (!disposedValue)
+        ArgumentNullException.ThrowIfNull(crashEvent);
+        ArgumentNullException.ThrowIfNull(crashEvent.Exception);
+        ArgumentException.ThrowIfNullOrWhiteSpace(crashEvent.EventID);
+
+        this.source.Execute(manager =>
         {
-            if (disposing)
+            manager.LogWithMessage(crashEvent.EventID);
+
+            if (!string.IsNullOrWhiteSpace(crashEvent.Message))
             {
-                this.initializationLock.Dispose();
+                manager.LogWithMessage(crashEvent.Message);
             }
 
-            disposedValue = true;
-        }
+            if (crashEvent.Parameters != null)
+            {
+                using NSDictionary<NSString, NSObject>? parameters = FirebaseAppleParameters.Create(crashEvent.Parameters, customValues: true);
+                manager.SetCustomKeysAndValues(parameters!);
+            }
+
+            RecordException(manager, crashEvent.Exception);
+        }, cancellationToken);
+
+        return Task.CompletedTask;
     }
 
-
-    public void Dispose()
+    /// <summary>Adds a diagnostic message without recording an error.</summary>
+    /// <param name="message">The diagnostic message.</param>
+    public void Log(string message)
     {
-        Dispose(disposing: true);
-        GC.SuppressFinalize(this);
-    }  
+        ArgumentException.ThrowIfNullOrWhiteSpace(message);
+        this.source.Execute(manager => manager.LogWithMessage(message));
+    }
 
-    #endregion
+    /// <summary>Records an NSError and optional event-specific metadata.</summary>
+    /// <param name="error">The native error.</param>
+    /// <param name="userInfo">Optional event-specific metadata.</param>
+    public void RecordError(NSError error, IReadOnlyDictionary<string, object?>? userInfo = null)
+    {
+        ArgumentNullException.ThrowIfNull(error);
+
+        using NSDictionary<NSString, NSObject>? nativeUserInfo = FirebaseAppleParameters.Create(userInfo, customValues: true);
+        this.source.Execute(manager =>
+        {
+            if (nativeUserInfo == null)
+            {
+                manager.RecordWithError(error);
+            }
+            else
+            {
+                manager.RecordWithError(error, nativeUserInfo);
+            }
+        });
+    }
+
+    /// <summary>Records a managed exception with its available managed stack frames.</summary>
+    /// <param name="exception">The managed exception.</param>
+    public void RecordException(Exception exception)
+    {
+        ArgumentNullException.ThrowIfNull(exception);
+        this.source.Execute(manager => RecordException(manager, exception));
+    }
+
+    /// <summary>Sets a custom value used by subsequent reports. Unsupported values are formatted invariantly.</summary>
+    /// <param name="key">The custom key.</param>
+    /// <param name="value">The custom value.</param>
+    public void SetCustomValue(string key, object? value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(key);
+        using NSObject nativeValue = FirebaseAppleParameters.CreateValue(value, customValues: true);
+        this.source.Execute(manager => manager.SetCustomValue(nativeValue, key));
+    }
+
+    /// <summary>Merges custom values used by subsequent reports.</summary>
+    /// <param name="values">The custom keys and values.</param>
+    public void SetCustomKeysAndValues(IReadOnlyDictionary<string, object?> values)
+    {
+        ArgumentNullException.ThrowIfNull(values);
+        using NSDictionary<NSString, NSObject>? nativeValues = FirebaseAppleParameters.Create(values, customValues: true);
+        this.source.Execute(manager => manager.SetCustomKeysAndValues(nativeValues!));
+    }
+
+    /// <summary>Sets or clears the Crashlytics user identifier.</summary>
+    /// <param name="userID">The identifier, or null to clear it.</param>
+    public void SetUserID(string? userID) => this.source.Execute(manager => manager.SetUserID(userID));
+
+    /// <summary>Sets Firebase's persisted automatic report collection override.</summary>
+    /// <param name="enabled">Whether automatic report collection is enabled.</param>
+    public void SetCrashlyticsCollectionEnabled(bool enabled) => this.source.Execute(manager => manager.SetCrashlyticsCollectionEnabled(enabled));
+
+    /// <summary>Checks for pending reports. Call once per launch when automatic collection is disabled.</summary>
+    /// <param name="cancellationToken">Token used to cancel the managed wait.</param>
+    /// <returns>True when pending reports are available.</returns>
+    /// <remarks>Cancellation only cancels the managed wait.</remarks>
+    public Task<bool> CheckForUnsentReportsAsync(CancellationToken cancellationToken = default)
+    {
+        TaskCompletionSource<bool> completion = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        this.source.Execute(manager => manager.CheckForUnsentReportsWithCompletion(available => completion.TrySetResult(available)),
+                            cancellationToken);
+        return completion.Task.WaitAsync(cancellationToken);
+    }
+
+    /// <summary>Requests upload of pending reports when automatic collection is disabled.</summary>
+    public void SendUnsentReports() => this.source.Execute(manager => manager.SendUnsentReports());
+
+    /// <summary>Deletes pending local reports when automatic collection is disabled.</summary>
+    public void DeleteUnsentReports() => this.source.Execute(manager => manager.DeleteUnsentReports());
+
+    /// <summary>Releases this native manager without shutting down the shared Firebase app.</summary>
+    public void Dispose() => this.source.Dispose();
+
+    private static void RecordException(CrashlyticsManager manager, Exception exception)
+    {
+        List<CrashlyticsStackFrame> nativeFrames = [];
+        string name = exception.GetType().FullName ?? exception.GetType().Name;
+        string reason = string.IsNullOrWhiteSpace(exception.Message) ? name : exception.Message;
+
+        try
+        {
+            foreach (StackFrame frame in new StackTrace(exception, true).GetFrames() ?? [])
+            {
+                MethodBase? method = frame.GetMethod();
+                string symbol = method == null
+                    ? frame.ToString()?.Trim() ?? "unknown"
+                    : $"{method.DeclaringType?.FullName ?? "unknown"}.{method.Name}";
+                string file = frame.GetFileName() ?? string.Empty;
+                int line = Math.Max(frame.GetFileLineNumber(), 0);
+                nativeFrames.Add(new CrashlyticsStackFrame(symbol, file, line));
+            }
+
+            manager.RecordExceptionWithName(name, reason, nativeFrames.ToArray());
+        }
+        finally
+        {
+            foreach (CrashlyticsStackFrame frame in nativeFrames)
+            {
+                frame.Dispose();
+            }
+        }
+    }
 
     #endregion
 }

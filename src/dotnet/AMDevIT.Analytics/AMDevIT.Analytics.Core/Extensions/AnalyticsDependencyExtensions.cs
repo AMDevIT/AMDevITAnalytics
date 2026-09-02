@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AMDevIT.Analytics.Core.Extensions;
 
+/// <summary>Registers the analytics orchestrator and exposes provider configuration through dependency injection.</summary>
 public static class AnalyticsDependencyExtensions
 {
     #region Methods

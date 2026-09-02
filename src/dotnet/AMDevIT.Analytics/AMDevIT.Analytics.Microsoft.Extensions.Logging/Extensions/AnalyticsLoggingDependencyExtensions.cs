@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace AMDevIT.Analytics.Microsoft.Extensions.Logging.Extensions;
 
+/// <summary>Registers the analytics logging provider and its options with dependency injection.</summary>
 public static class AnalyticsLoggingDependencyExtensions
 {
     #region Methods
