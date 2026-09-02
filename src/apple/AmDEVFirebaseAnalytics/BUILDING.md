@@ -1,12 +1,13 @@
-# Building the Apple wrapper and generating .NET bindings
+# Building the AMDev.IT Analytics Apple wrapper
 
 ## Prerequisites
 
 - macOS with full Xcode selected through `xcode-select` and its license accepted.
-- An Xcode/SDK version supporting this project's iOS 26.5 deployment target and the
-  Firebase version pinned in `Package.resolved`.
+- An Xcode/SDK version supporting the Swift tools version required by Firebase 12.18.0
+  in `Package.resolved` (Swift tools 6.1). The wrapper deployment target is 15.6 for iOS
+  and Mac Catalyst; SDK version and deployment target are different settings.
 - Network access for the first Swift Package Manager resolution.
-- Objective Sharpie with the `--header` and `--scope` options, and the .NET iOS workload,
+- Objective Sharpie with the `--header` and `--scope` options, and the .NET 10 iOS/Mac Catalyst workloads,
   for C# generation. Install these separately; the scripts do not install tools.
 - `xcpretty` is optional. Full build logs are retained with or without it.
 
@@ -26,6 +27,11 @@ archives for iOS devices, iOS Simulator, and Mac Catalyst. It enables module/hea
 library distribution, dSYM generation, and all architectures supported by the selected
 destination. It prints the resulting XCFramework slices instead of assuming Intel
 simulator support in every Xcode release.
+
+The Xcode resource phase preserves the 17 required SPM resource bundles and the wrapper
+privacy manifest. It fails if a bundle or manifest is missing. The archive script checks
+resources again in every archive and in the finished XCFramework. See [PRIVACY.md](PRIVACY.md)
+for the dependency audit, provenance, layout, and final-app validation requirements.
 
 The output is `build/AmDEVFirebaseAnalytics.xcframework`, including each wrapper dSYM.
 Full archives, package checkouts, DerivedData, and logs are retained under a fresh
@@ -77,19 +83,25 @@ replaces the entire output directory. Do not run concurrent extractions in one c
 Objective Sharpie creates a starting point, not a validated binding. Review generated
 Objective-C names/selectors, nullability, enum widths, constructors, callback signatures,
 and any `Verify` attributes before integrating the definitions into `BindingApple`.
-Add the XCFramework as a `NativeReference` and complete the managed adapter separately.
-The current .NET projects still target iOS; using the Catalyst slice also requires the
-corresponding .NET target and a compatible managed dependency graph.
+BindingApple already references the XCFramework as a `NativeReference`. BindingApple,
+ManagedApple, and Core declare `net10.0-maccatalyst` as well as iOS. ManagedApple implements
+the native control surface and shared initialization. Replace the entire artifact under
+`src/dotnet/AMDevIT.Analytics/AMDevIT.Analytics.Firebase.BindingApple/libs`, preserving
+Catalyst symlinks and all dSYMs; do not overlay a new build onto stale slices.
 
-The XCFramework command packages the wrapper and its dSYMs, not every Firebase resource
-or transitive dependency automatically. Inspect the linked binaries, Swift runtime needs,
-privacy manifests, resource bundles, and any other Firebase usage in the host before
-building the NuGet package. Avoid embedding duplicate static Firebase implementations.
-Configure the host's Firebase settings and Crashlytics symbol uploads for its final app.
+Firebase remains compiled into the wrapper through Swift Package Manager. The added
+resource phase copies bundles, not Firebase binaries. Inspect native dependency load
+commands, Swift runtime needs, resources in the actual NuGet payload/final app, and any
+other Firebase integration in the host. Coexistence with another independently linked
+Firebase copy is not guaranteed. Configure the host's Firebase settings, consent,
+privacy disclosures, and Crashlytics symbol uploads for its final app.
 
-Compilation, Sharpie execution, symbol inspection, and device/Release integration tests
-have not been performed in the Windows editing environment. They require an authorized
-run on macOS/Xcode; the existing Firebase initializer still needs separate lifecycle work.
+The previously committed binary lacks resources and dSYMs and has not been rebuilt by
+this change. Restore, compilation, Sharpie execution, and platform tests were not run.
+See the repository [test guide](../../../TESTING.md) for Swift and .NET suites and
+[release guide](../../../RELEASING.md) for the remaining gates. Configure Firebase once
+on the main thread before background logging; use the managed existing-app option only
+when the host has already configured the relevant default app.
 
 ## References
 

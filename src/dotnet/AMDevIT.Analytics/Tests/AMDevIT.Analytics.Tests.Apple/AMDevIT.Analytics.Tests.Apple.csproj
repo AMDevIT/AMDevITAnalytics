@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>15.6</SupportedOSPlatformVersion>
+    <ApplicationId>it.amdev.analytics.tests.apple</ApplicationId>
+    <ApplicationTitle>AMDev.IT Analytics Tests</ApplicationTitle>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../AMDevIT.Analytics.Firebase.ManagedApple/AMDevIT.Analytics.Firebase.ManagedApple.csproj" />
+    <Compile Include="../Shared/PlatformTestRunner.cs" Link="PlatformTestRunner.cs" />
+  </ItemGroup>
+</Project>

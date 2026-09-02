@@ -13,26 +13,42 @@ import FirebaseAnalytics
 @objc public class AnalyticsManager
     : NSObject {
 
+    // MARK: - Properties
+
+    private let backend: AnalyticsBackend
+
+    // MARK: - Initialization
+
+    public override init() {
+        self.backend = .live
+        super.init()
+    }
+
+    internal init(backend: AnalyticsBackend) {
+        self.backend = backend
+        super.init()
+    }
+
     // MARK: - Methods
 
     /// Records an event using Firebase's event-name and parameter restrictions.
     @objc public func logEvent(name: String, parameters: [String: Any]? = nil) {
-        Analytics.logEvent(name, parameters: parameters)
+        self.backend.logEvent(name, parameters)
     }
 
     /// Associates events with an identifier, or removes it when nil.
     @objc public func setUserID(_ userID: String?) {
-        Analytics.setUserID(userID)
+        self.backend.setUserID(userID)
     }
 
     /// Sets a user property, or removes it when the value is nil.
     @objc public func setUserProperty(_ value: String?, forName name: String) {
-        Analytics.setUserProperty(value, forName: name)
+        self.backend.setUserProperty(value, name)
     }
 
     /// Enables or disables Analytics collection; Firebase persists this setting.
     @objc public func setAnalyticsCollectionEnabled(_ enabled: Bool) {
-        Analytics.setAnalyticsCollectionEnabled(enabled)
+        self.backend.setCollectionEnabled(enabled)
     }
 
     /// Updates the specified consent categories without changing omitted categories.
@@ -58,29 +74,29 @@ import FirebaseAnalytics
         }
 
         if !consent.isEmpty {
-            Analytics.setConsent(consent)
+            self.backend.setConsent(consent)
         }
     }
 
     /// Merges default parameters; NSNull removes a key and nil clears all defaults.
     @objc public func setDefaultEventParameters(_ parameters: [String: Any]?) {
-        Analytics.setDefaultEventParameters(parameters)
+        self.backend.setDefaultParameters(parameters)
     }
 
     /// Clears local Analytics data and resets the app instance identifier.
     @objc public func resetAnalyticsData() {
-        Analytics.resetAnalyticsData()
+        self.backend.resetData()
     }
 
     /// Sets the inactivity timeout in seconds.
     @objc public func setSessionTimeoutInterval(_ interval: TimeInterval) {
-        Analytics.setSessionTimeoutInterval(interval)
+        self.backend.setSessionTimeout(interval)
     }
 
     /// Retrieves the session identifier or an error on Firebase's callback queue.
     /// NSNumber preserves the Int64 identifier while allowing nil on failure.
     @objc public func sessionID(completion: @escaping (NSNumber?, NSError?) -> Void) {
-        Analytics.sessionID { sessionID, error in
+        self.backend.sessionID { sessionID, error in
             if let error = error {
                 completion(nil, error as NSError)
             } else {
@@ -91,6 +107,6 @@ import FirebaseAnalytics
 
     /// Returns the app instance identifier, or nil when unavailable.
     @objc public func appInstanceID() -> String? {
-        return Analytics.appInstanceID()
+        return self.backend.appInstanceID()
     }
 }

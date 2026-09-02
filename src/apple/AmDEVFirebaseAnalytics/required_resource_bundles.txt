@@ -1,0 +1,17 @@
+FirebaseCore
+FirebaseCoreExtension
+FirebaseCoreInternal
+FirebaseCrashlytics
+FirebaseInstallations
+GoogleUtilities-AppDelegateSwizzler
+GoogleUtilities-Environment
+GoogleUtilities-Logger
+GoogleUtilities-MethodSwizzler
+GoogleUtilities-Network
+GoogleUtilities-NSData
+GoogleUtilities-Reachability
+GoogleUtilities-UserDefaults
+GoogleDataTransport
+FBLPromises
+Promises
+nanopb

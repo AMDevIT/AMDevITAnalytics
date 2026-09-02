@@ -16,7 +16,7 @@ public sealed class FirebaseAnalyticsLoggerSource : IAnalyticsLoggerSource, IDis
 
     #region Fields
 
-    private readonly FirebaseAppleSource<AnalyticsManager> source = new();
+    private readonly FirebaseAppleSource<IFirebaseAnalyticsManager> source;
 
     #endregion
 
@@ -33,6 +33,20 @@ public sealed class FirebaseAnalyticsLoggerSource : IAnalyticsLoggerSource, IDis
 
     /// <summary>Gets the Analytics app instance identifier, or null when unavailable.</summary>
     public string? AppInstanceID => this.source.Read(manager => manager.AppInstanceID);
+
+    #endregion
+
+    #region .ctor
+
+    /// <summary>Creates a lazily initialized Apple Analytics source.</summary>
+    public FirebaseAnalyticsLoggerSource() : this(new FirebaseAppleSource<IFirebaseAnalyticsManager>(() => new FirebaseAnalyticsManager(), () => FirebaseApple.Initialize()))
+    {
+    }
+
+    internal FirebaseAnalyticsLoggerSource(FirebaseAppleSource<IFirebaseAnalyticsManager> source)
+    {
+        this.source = source;
+    }
 
     #endregion
 
@@ -141,7 +155,7 @@ public sealed class FirebaseAnalyticsLoggerSource : IAnalyticsLoggerSource, IDis
             }
         }), cancellationToken);
 
-        return completion.Task.WaitAsync(cancellationToken);
+        return FirebaseAppleCallback.WaitAsync(completion, cancellationToken);
     }
 
     /// <summary>Releases this native manager without shutting down the shared Firebase app.</summary>

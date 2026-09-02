@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <ApplicationId>it.amdev.analytics.tests.android</ApplicationId>
+    <ApplicationTitle>AMDev.IT Analytics Tests</ApplicationTitle>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../AMDevIT.Analytics.Firebase.ManagedDroid/AMDevIT.Analytics.Firebase.ManagedDroid.csproj" />
+    <Compile Include="../Shared/PlatformTestRunner.cs" Link="PlatformTestRunner.cs" />
+  </ItemGroup>
+</Project>

@@ -1,5 +1,24 @@
 # Progressive context
 
+## Current step: Catalyst, resources, documentation, and tests (2026-09-02)
+
+- Objective/status: implemented the confirmed source changes; no restore/build/pack or test execution.
+- Decisions: AMDev.IT Analytics branding; Core/Apple Catalyst targets; Firebase stays in the Xcode/SPM
+  wrapper; preserve 17 vendor resource bundles and verify manifests; wrapper minimum 15.6, Swift tests 17.0.
+- Tests: 43 .NET methods across desktop and Apple/Android hosts; 10 Swift methods and shared Xcode scheme.
+  Internal managed interfaces avoid subclassing restricted Swift classes. Public Objective-C API is unchanged.
+- Fixes: canceled Apple callbacks cannot leave faulted abandoned tasks; logger async disposal has a bounded
+  extra wait when a provider ignores cancellation. README documents portable UnobservedTaskException reporting.
+- Files: platform projects and solution, managed startup/adapters/callbacks, logger disposal, Swift sources/tests,
+  Xcode/resource scripts, privacy manifest/audit, README/RELEASING/TESTING/BUILDING/DocC, icon documentation.
+- Checks: fetch/upstream 0/0; pinned dependency/resource inspection; C# syntax, XML, Bash syntax, API/docs review,
+  and git diff whitespace checks passed. These checks do not establish compilation or runtime success.
+- Open issues/next: existing XCFramework remains unchanged and lacks manifests, vendor bundles, and dSYMs.
+  After authorization, regenerate it on macOS, run all suites, and validate NuGet-only Release consumers,
+  resource lookup, privacy reports, signing, symbols, and Firebase delivery on each advertised platform.
+
+See catalyst-privacy-tests.md for scope, verification limits, and the release blocker.
+
 ## Current step: Managed Apple Firebase implementation (2026-08-31)
 
 - Objective/status: implemented the iOS managed adapter over BindingApple; static review is complete. Restore,

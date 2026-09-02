@@ -3,6 +3,7 @@
     <File Path="../../../AGENTS.md" />
     <File Path="../../../README.md" />
     <File Path="../../../RELEASING.md" />
+    <File Path="../../../TESTING.md" />
     <File Path="Directory.Build.props" />
   </Folder>
   <Folder Name="/Libraries/" />
@@ -19,5 +20,10 @@
   <Folder Name="/Libraries/Firebase/">
     <Project Path="AMDevIT.Analytics.Firebase.ManagedApple/AMDevIT.Analytics.Firebase.ManagedApple.csproj" Id="2999fe4f-c6d2-493f-87ae-07d7519733ca" />
     <Project Path="AMDevIT.Analytics.Firebase.ManagedDroid/AMDevIT.Analytics.Firebase.ManagedDroid.csproj" Id="e5476dfb-8863-4661-96ec-d2425e8815ce" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/AMDevIT.Analytics.Tests/AMDevIT.Analytics.Tests.csproj" />
+    <Project Path="Tests/AMDevIT.Analytics.Tests.Apple/AMDevIT.Analytics.Tests.Apple.csproj" />
+    <Project Path="Tests/AMDevIT.Analytics.Tests.Android/AMDevIT.Analytics.Tests.Android.csproj" />
   </Folder>
 </Solution>

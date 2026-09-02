@@ -1,4 +1,4 @@
-# AMDevIT.Analytics
+# AMDev.IT Analytics
 
 Provider-neutral analytics and crash reporting for .NET, with Firebase integrations and an optional `Microsoft.Extensions.Logging` bridge.
 
@@ -11,13 +11,13 @@ The repository currently declares version **0.0.6**. This is the source version,
 | Package / project | Target frameworks | Purpose and current status |
 | --- | --- | --- |
 | `AMDevIT.Analytics.Abstractions` | `net10.0` | Event records and provider lifecycle, analytics, and crash-reporting contracts. |
-| `AMDevIT.Analytics.Core` | `net10.0`, `net10.0-ios`, `net10.0-android` | Provider orchestration, dependency injection, and aggregated failures. |
+| `AMDevIT.Analytics.Core` | `net10.0`, `net10.0-ios`, `net10.0-maccatalyst`, `net10.0-android` | Provider orchestration, dependency injection, and aggregated failures. |
 | `AMDevIT.Analytics.Firebase.ManagedDroid` | `net10.0-android` | Implemented Firebase Analytics and Crashlytics sources, with combined or separate DI registrations. |
-| `AMDevIT.Analytics.Firebase.BindingApple` | `net10.0-ios` | Low-level binding to the bundled native Apple wrapper. Binding compilation has been checked; native linking and app runtime integration still need validation. |
-| `AMDevIT.Analytics.Firebase.ManagedApple` | `net10.0-ios` | Managed Analytics and Crashlytics sources over the Apple binding. Native linking and device runtime validation are still required. |
+| `AMDevIT.Analytics.Firebase.BindingApple` | `net10.0-ios`, `net10.0-maccatalyst` | Low-level binding to the bundled native Apple wrapper. The new targets and native packaging still require build and host validation. |
+| `AMDevIT.Analytics.Firebase.ManagedApple` | `net10.0-ios`, `net10.0-maccatalyst` | Managed Analytics and Crashlytics sources over the Apple binding. Device and Catalyst runtime validation are still required. |
 | `AMDevIT.Analytics.Microsoft.Extensions.Logging` | `net10.0` | Optional queued `ILoggerProvider` that forwards selected logs and exceptions. |
 
-The native Apple build scripts support iOS device, iOS Simulator, and Mac Catalyst archives. The .NET Apple projects currently target **iOS only**, not `net10.0-maccatalyst`. Do not infer managed Mac Catalyst support from the native wrapper.
+The Apple projects declare iOS and Mac Catalyst support with a minimum platform version of 15.6. The Xcode build produces device, Simulator, and Catalyst slices. These declarations do not replace testing the final application. **AMDev.IT Analytics** is the project name; **AMDevITAnalytics** is the GitHub repository name. Existing package IDs and namespaces remain `AMDevIT.Analytics.*`.
 
 ## Getting started on Android
 
@@ -54,7 +54,7 @@ services.AddAMDevITAnalytics()
         .AddFirebaseCrashlytics();
 ```
 
-These Firebase registration extensions currently belong to the **Android** provider. In a multitargeted host, keep their imports and registrations in Android-specific code.
+Both managed Firebase providers expose these registration extensions. In a multitargeted host, select the Android or Apple namespace with platform-specific imports; do not import both at once.
 
 ### Initialize and record events
 
@@ -89,6 +89,49 @@ await analytics.LogErrorAsync(exception,
 ```
 
 The overloads also accept `AnalyticsEvent` and `CrashEvent` records from `AMDevIT.Analytics.Abstractions`. Use event names and parameter types accepted by the destination provider. On Android, an event's optional message is added as the `message` parameter unless that key already exists.
+
+### Crashlytics: unobserved task exceptions
+
+Use `IAnalyticsInstance.LogErrorAsync` instead of calling `FirebaseCrashlytics.Instance.RecordException` directly. Register a Crashlytics source with `AddFirebase()` or `AddFirebaseCrashlytics()` first. Without a crash source, the common API has nowhere to send the exception.
+
+After Firebase and the analytics sources have been initialized at application startup, register this handler **once** for the application's lifetime. On iOS and Mac Catalyst, call `FirebaseApple.Initialize()` on the main thread before this code, as shown in [Apple integration](#apple-integration).
+
+```csharp
+using AMDevIT.Analytics.Core;
+using Microsoft.Extensions.DependencyInjection;
+
+IAnalyticsInstance analytics = serviceProvider.GetRequiredService<IAnalyticsInstance>();
+await analytics.InitializeAsync();
+
+EventHandler<UnobservedTaskExceptionEventArgs> onUnobservedTaskException = (sender, args) =>
+{
+    Exception exception = args.Exception;
+
+    // Keep provider work off the thread raising this event.
+    _ = Task.Run(() => ReportUnobservedAsync(analytics, exception));
+};
+
+TaskScheduler.UnobservedTaskException += onUnobservedTaskException;
+
+static async Task ReportUnobservedAsync(IAnalyticsInstance analytics, Exception exception)
+{
+    try
+    {
+        await analytics.LogErrorAsync(exception,
+                                      eventID: "unobserved_task_exception",
+                                      message: "An unobserved task failed.").ConfigureAwait(false);
+    }
+    catch (Exception)
+    {
+        // Best effort: never create another unobserved failure or report recursively.
+        // If needed, write to an independent local diagnostic sink here.
+    }
+}
+```
+
+The same handler works with the Android and Apple providers; it needs no direct Java exception conversion. The API-33 guard in an application's existing handler is an application-specific restriction, not a requirement introduced by this library. If your application still needs that restriction, keep its Android guard before scheduling the report.
+
+This records a **non-fatal managed exception**. `UnobservedTaskException` is not a handler for every application crash: its timing depends on task collection, and termination may prevent the event or upload. Prefer catching and awaiting errors at their original call site. This example deliberately does not call `args.SetObserved()`; observation is an application policy. Unsubscribe using the same `onUnobservedTaskException` delegate before disposing the application's analytics services, and account for any reports already in flight. Do not send secrets or personal data in exception messages or parameters.
 
 ## Lifecycle and failures
 
@@ -195,9 +238,15 @@ services.AddAMDevITAnalytics()
 
 `FirebaseAnalyticsLoggerSource` accepts strings, finite numbers, booleans, and Firebase's `items` collection. `FirebaseCrashEventLoggerSource` converts managed stack traces to the native exception model and exposes collection and pending-report controls. Crash custom keys are persistent Firebase context and can therefore affect later reports.
 
-See the [Apple build guide](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/src/apple/AmDEVFirebaseAnalytics/BUILDING.md) for XCFramework generation, Objective Sharpie extraction, prerequisites, and integration caveats. The checked-in Xcode project currently uses an iOS 26.5 deployment target; verify it against your supported devices before release.
+Add `AMDevIT.Analytics.Firebase.ManagedApple` to the iOS and Mac Catalyst targets of the host. Include the host's `GoogleService-Info.plist` as a bundle resource. Firebase remains compiled into the native wrapper through the Xcode project's Swift Package dependencies; there is no separate optional Firebase runtime NuGet package. Do not assume compatibility with another independently embedded Firebase copy.
 
-Native dependency and resource packaging, privacy manifests, signing, initialization ownership with other Firebase integrations, host symbol uploads, and device/Release validation remain release work. Successful binding compilation alone does not establish a working Firebase app integration.
+See the [Apple build guide](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/src/apple/AmDEVFirebaseAnalytics/BUILDING.md) and [privacy/resource audit](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/src/apple/AmDEVFirebaseAnalytics/PRIVACY.md). The Xcode resource phase preserves the pinned dependencies' bundles; archive checks reject missing manifests. **The previously committed XCFramework has not been rebuilt and lacks these resources and wrapper dSYMs. It is not release-ready.** Regenerate and replace it on macOS before packaging.
+
+Signing, host privacy declarations and consent, initialization ownership, Crashlytics symbol uploads, and device/Release validation remain host/release responsibilities. Successful binding compilation alone does not establish a working Firebase app integration.
+
+## Tests
+
+The repository includes Swift tests for the native wrapper, MSTest tests for Core and the logging bridge, and .NET test apps for Foundation and Android runtime behavior. The unit suites do not require Firebase credentials or send telemetry. See [TESTING.md](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/TESTING.md) for coverage, commands, and the separate real-Firebase integration checklist. The added tests have not been executed during this change; restore and build were explicitly excluded.
 
 ## Repository layout
 
@@ -217,6 +266,8 @@ All package projects share the root README and `assets/icons/nuget_icon_128.png`
 NuGet supports PNG/JPEG package icons up to 1 MB and recommends 128 × 128 pixels. See the [NuGet icon and README reference](https://learn.microsoft.com/en-us/nuget/reference/nuspec#icon). Asset details and generation provenance are documented in `assets/icons/README.md`.
 
 Before publishing, restore and build the intended projects with their platform workloads, inspect the resulting `.nupkg` for the README, icon, binding, and native dependencies, and validate the host application on a device. Updating these assets does not validate or publish a package.
+
+Use [RELEASING.md](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/RELEASING.md) for the six-package release checklist, native resources, symbols, and platform validation.
 
 ## License
 

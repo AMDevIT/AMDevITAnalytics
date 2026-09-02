@@ -12,7 +12,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 {
     #region Fields
 
-    private readonly FirebaseAppleSource<CrashlyticsManager> source = new();
+    private readonly FirebaseAppleSource<IFirebaseCrashlyticsManager> source;
 
     #endregion
 
@@ -32,6 +32,20 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 
     /// <summary>Gets whether Crashlytics detected a crash during the previous execution.</summary>
     public bool DidCrashDuringPreviousExecution => this.source.Read(manager => manager.DidCrashDuringPreviousExecution);
+
+    #endregion
+
+    #region .ctor
+
+    /// <summary>Creates a lazily initialized Apple Crashlytics source.</summary>
+    public FirebaseCrashEventLoggerSource() : this(new FirebaseAppleSource<IFirebaseCrashlyticsManager>(() => new FirebaseCrashlyticsManager(), () => FirebaseApple.Initialize()))
+    {
+    }
+
+    internal FirebaseCrashEventLoggerSource(FirebaseAppleSource<IFirebaseCrashlyticsManager> source)
+    {
+        this.source = source;
+    }
 
     #endregion
 
@@ -147,7 +161,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 
         this.source.Execute(manager => manager.CheckForUnsentReportsWithCompletion(available => completion.TrySetResult(available)),
                             cancellationToken);
-        return completion.Task.WaitAsync(cancellationToken);
+        return FirebaseAppleCallback.WaitAsync(completion, cancellationToken);
     }
 
     /// <summary>Requests upload of pending reports when automatic collection is disabled.</summary>
@@ -159,7 +173,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
     /// <summary>Releases this native manager without shutting down the shared Firebase app.</summary>
     public void Dispose() => this.source.Dispose();
 
-    private static void RecordException(CrashlyticsManager manager, Exception exception)
+    private static void RecordException(IFirebaseCrashlyticsManager manager, Exception exception)
     {
         List<CrashlyticsStackFrame> nativeFrames = [];
         string name = exception.GetType().FullName ?? exception.GetType().Name;
