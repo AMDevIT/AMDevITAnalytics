@@ -6,6 +6,16 @@
     <ApplicationId>it.amdev.analytics.tests.android</ApplicationId>
     <ApplicationTitle>AMDev.IT Analytics Tests</ApplicationTitle>
   </PropertyGroup>
+  
+  <ItemGroup>
+   <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.4.0" />
+     <PackageReference Include="MSTest.TestAdapter" Version="4.4.0" />
+    <PackageReference Include="MSTest.Analyzers" Version="4.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../AMDevIT.Analytics.Firebase.ManagedDroid/AMDevIT.Analytics.Firebase.ManagedDroid.csproj" />
     <Compile Include="../Shared/PlatformTestRunner.cs" Link="PlatformTestRunner.cs" />

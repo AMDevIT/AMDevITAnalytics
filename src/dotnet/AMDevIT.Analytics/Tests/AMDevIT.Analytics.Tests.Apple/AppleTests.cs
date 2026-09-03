@@ -99,9 +99,9 @@ public sealed class AppleTests
     {
         Dictionary<string, object?> input = new() { ["key"] = null };
         using NSString key = new("key");
-        using NSDictionary<NSString, NSObject> omitted = FirebaseAppleParameters.Create(input)!;
-        using NSDictionary<NSString, NSObject> removed = FirebaseAppleParameters.Create(input, nullRemovesValue: true)!;
-        using NSDictionary<NSString, NSObject> custom = FirebaseAppleParameters.Create(input, customValues: true)!;
+        using NSDictionary omitted = FirebaseAppleParameters.Create(input)!;
+        using NSDictionary removed = FirebaseAppleParameters.Create(input, nullRemovesValue: true)!;
+        using NSDictionary custom = FirebaseAppleParameters.Create(input, customValues: true)!;
         Assert.AreEqual((nuint)0, omitted.Count);
         Assert.IsInstanceOfType<NSNull>(removed[key]);
         Assert.AreEqual("", custom[key].ToString());
@@ -114,7 +114,7 @@ public sealed class AppleTests
     {
         Dictionary<string, object?> item = new() { ["item_id"] = "sku", ["quantity"] = 2 };
         Dictionary<string, object?> input = new() { ["items"] = new[] { item } };
-        using NSDictionary<NSString, NSObject> result = FirebaseAppleParameters.Create(input, allowItems: true)!;
+        using NSDictionary result = FirebaseAppleParameters.Create(input, allowItems: true)!;
         using NSString key = new("items");
         using NSString itemKey = new("item_id");
         NSArray items = (NSArray)result[key];

@@ -15,8 +15,8 @@
     <InternalsVisibleTo Include="AMDevIT.Analytics.Tests.Android" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.11" />
-    <PackageReference Include="Xamarin.Firebase.Analytics" Version="123.2.0.1" />
-    <PackageReference Include="Xamarin.Firebase.Crashlytics" Version="120.1.0" />
+    <PackageReference Include="Xamarin.Firebase.Analytics" Version="123.2.0.2" />
+    <PackageReference Include="Xamarin.Firebase.Crashlytics" Version="120.1.0.1" />
   </ItemGroup>
 
 </Project>

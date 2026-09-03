@@ -1,5 +1,4 @@
 using System;
-using AmDEVFirebaseAnalytics;
 using Foundation;
 using ObjCRuntime;
 
@@ -9,7 +8,7 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 	interface AnalyticsManager {
 		// -(void)logEventWithName:(NSString * _Nonnull)name parameters:(NSDictionary<NSString *,id> * _Nullable)parameters;
 		[Export ("logEventWithName:parameters:")]
-		void LogEventWithName (string name, [NullAllowed] NSDictionary<NSString, NSObject> parameters);
+		void LogEventWithName (string name, [NullAllowed] NSDictionary parameters);
 
 		// -(void)setUserID:(NSString * _Nullable)userID;
 		[Export ("setUserID:")]
@@ -29,7 +28,7 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(void)setDefaultEventParameters:(NSDictionary<NSString *,id> * _Nullable)parameters;
 		[Export ("setDefaultEventParameters:")]
-		void SetDefaultEventParameters ([NullAllowed] NSDictionary<NSString, NSObject> parameters);
+		void SetDefaultEventParameters ([NullAllowed] NSDictionary parameters);
 
 		// -(void)resetAnalyticsData;
 		[Export ("resetAnalyticsData")]
@@ -45,7 +44,7 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(NSString * _Nullable)appInstanceID __attribute__((warn_unused_result("")));
 		[NullAllowed, Export ("appInstanceID")]
-		[Verify (MethodToProperty)]
+	//	[Verify (MethodToProperty)]
 		string AppInstanceID { get; }
 	}
 
@@ -62,7 +61,7 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(void)recordWithError:(NSError * _Nonnull)error userInfo:(NSDictionary<NSString *,id> * _Nullable)userInfo;
 		[Export ("recordWithError:userInfo:")]
-		void RecordWithError (NSError error, [NullAllowed] NSDictionary<NSString, NSObject> userInfo);
+		void RecordWithError (NSError error, [NullAllowed] NSDictionary userInfo);
 
 		// -(void)recordExceptionWithName:(NSString * _Nonnull)name reason:(NSString * _Nonnull)reason stackTrace:(NSArray<CrashlyticsStackFrame *> * _Nonnull)stackTrace;
 		[Export ("recordExceptionWithName:reason:stackTrace:")]
@@ -74,7 +73,7 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(void)setCustomKeysAndValues:(NSDictionary<NSString *,id> * _Nonnull)values;
 		[Export ("setCustomKeysAndValues:")]
-		void SetCustomKeysAndValues (NSDictionary<NSString, NSObject> values);
+		void SetCustomKeysAndValues (NSDictionary values);
 
 		// -(void)setUserID:(NSString * _Nullable)userID;
 		[Export ("setUserID:")]
@@ -86,12 +85,12 @@ namespace AMDevIT.Analytics.Firebase.BindingApple {
 
 		// -(BOOL)isCrashlyticsCollectionEnabled __attribute__((warn_unused_result("")));
 		[Export ("isCrashlyticsCollectionEnabled")]
-		[Verify (MethodToProperty)]
+	//	[Verify (MethodToProperty)]
 		bool IsCrashlyticsCollectionEnabled { get; }
 
 		// -(BOOL)didCrashDuringPreviousExecution __attribute__((warn_unused_result("")));
 		[Export ("didCrashDuringPreviousExecution")]
-		[Verify (MethodToProperty)]
+	//	[Verify (MethodToProperty)]
 		bool DidCrashDuringPreviousExecution { get; }
 
 		// -(void)checkForUnsentReportsWithCompletion:(void (^ _Nonnull)(BOOL))completion;

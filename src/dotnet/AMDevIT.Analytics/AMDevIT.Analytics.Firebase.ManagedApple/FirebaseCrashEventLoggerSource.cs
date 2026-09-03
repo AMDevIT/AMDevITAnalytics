@@ -77,7 +77,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 
             if (crashEvent.Parameters != null)
             {
-                using NSDictionary<NSString, NSObject>? parameters = FirebaseAppleParameters.Create(crashEvent.Parameters, customValues: true);
+                using NSDictionary? parameters = FirebaseAppleParameters.Create(crashEvent.Parameters, customValues: true);
                 manager.SetCustomKeysAndValues(parameters!);
             }
 
@@ -102,7 +102,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
     {
         ArgumentNullException.ThrowIfNull(error);
 
-        using NSDictionary<NSString, NSObject>? nativeUserInfo = FirebaseAppleParameters.Create(userInfo, customValues: true);
+        using NSDictionary? nativeUserInfo = FirebaseAppleParameters.Create(userInfo, customValues: true);
         this.source.Execute(manager =>
         {
             if (nativeUserInfo == null)
@@ -139,7 +139,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
     public void SetCustomKeysAndValues(IReadOnlyDictionary<string, object?> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        using NSDictionary<NSString, NSObject>? nativeValues = FirebaseAppleParameters.Create(values, customValues: true);
+        using NSDictionary? nativeValues = FirebaseAppleParameters.Create(values, customValues: true);
         this.source.Execute(manager => manager.SetCustomKeysAndValues(nativeValues!));
     }
 

@@ -7,10 +7,10 @@ internal static class FirebaseAppleParameters
 {
     #region Methods
 
-    public static NSDictionary<NSString, NSObject>? Create(IReadOnlyDictionary<string, object?>? parameters,
-                                                            bool customValues = false,
-                                                            bool nullRemovesValue = false,
-                                                            bool allowItems = false)
+    public static NSDictionary? Create(IReadOnlyDictionary<string, object?>? parameters,
+                                                           bool customValues = false,
+                                                           bool nullRemovesValue = false,
+                                                           bool allowItems = false)
     {
         NSMutableDictionary<NSString, NSObject> result;
 
@@ -19,7 +19,7 @@ internal static class FirebaseAppleParameters
             return null;
         }
 
-        result = new();
+        result = [];
 
         try
         {

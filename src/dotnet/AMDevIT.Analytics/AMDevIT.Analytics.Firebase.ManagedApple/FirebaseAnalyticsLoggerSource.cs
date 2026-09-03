@@ -74,7 +74,7 @@ public sealed class FirebaseAnalyticsLoggerSource : IAnalyticsLoggerSource, IDis
             parameters.Add(MessageParameter, analyticsEvent.Message);
         }
 
-        using NSDictionary<NSString, NSObject>? nativeParameters = FirebaseAppleParameters.Create(parameters, allowItems: true);
+        using NSDictionary? nativeParameters = FirebaseAppleParameters.Create(parameters, allowItems: true);
         this.source.Execute(manager => manager.LogEventWithName(analyticsEvent.EventID, nativeParameters), cancellationToken);
         return Task.CompletedTask;
     }
@@ -120,7 +120,7 @@ public sealed class FirebaseAnalyticsLoggerSource : IAnalyticsLoggerSource, IDis
     /// <param name="parameters">The parameters to merge, or null to clear all defaults.</param>
     public void SetDefaultEventParameters(IReadOnlyDictionary<string, object?>? parameters)
     {
-        using NSDictionary<NSString, NSObject>? nativeParameters = FirebaseAppleParameters.Create(parameters, nullRemovesValue: true);
+        using NSDictionary? nativeParameters = FirebaseAppleParameters.Create(parameters, nullRemovesValue: true);
         this.source.Execute(manager => manager.SetDefaultEventParameters(nativeParameters));
     }
 

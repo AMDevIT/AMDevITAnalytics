@@ -5,7 +5,4 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <EnablePackageValidation>false</EnablePackageValidation>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MSTest.TestFramework" Version="4.3.3" />
-  </ItemGroup>
 </Project>
