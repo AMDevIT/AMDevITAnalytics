@@ -96,8 +96,9 @@ other Firebase integration in the host. Coexistence with another independently l
 Firebase copy is not guaranteed. Configure the host's Firebase settings, consent,
 privacy disclosures, and Crashlytics symbol uploads for its final app.
 
-The previously committed binary lacks resources and dSYMs and has not been rebuilt by
-this change. Restore, compilation, Sharpie execution, and platform tests were not run.
+The checked-in binary was regenerated in commit `80d0d8a` with the required resources
+and dSYMs. Re-run the complete procedure for each release candidate and validate the
+resulting app archive; the presence of files in the repository is not runtime proof.
 See the repository [test guide](../../../TESTING.md) for Swift and .NET suites and
 [release guide](../../../RELEASING.md) for the remaining gates. Configure Firebase once
 on the main thread before background logging; use the managed existing-app option only

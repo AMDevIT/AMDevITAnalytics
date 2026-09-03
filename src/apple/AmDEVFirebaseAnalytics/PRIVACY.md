@@ -2,11 +2,12 @@
 
 ## Audit and release status
 
-The audit on 2026-09-02 inspected the committed XCFramework and the dependency graph at
-the revisions in `AmDEVFirebaseAnalytics.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
-The committed wrapper contains no `PrivacyInfo.xcprivacy` or dependency resource bundles.
-Its XCFramework plist advertises dSYMs, but those directories are absent. **Do not release
-that binary unchanged.** No native rebuild or app archive validation was performed.
+The initial audit on 2026-09-02 inspected the dependency graph at the revisions in
+`AmDEVFirebaseAnalytics.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
+Commit `80d0d8a` subsequently regenerated the checked-in XCFramework. Its three slices
+now contain 54 privacy manifests in total (the wrapper plus 17 dependency bundles per
+slice), 51 dependency bundles, and three wrapper dSYMs. This repository inspection does
+not replace final app-archive privacy, signing, UUID, symbolication, or runtime validation.
 
 Firebase packaging remains unchanged: Xcode builds the Swift Package dependencies into
 the wrapper. This change preserves resources; it does not extract or relink Firebase

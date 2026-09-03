@@ -240,13 +240,13 @@ services.AddAMDevITAnalytics()
 
 Add `AMDevIT.Analytics.Firebase.ManagedApple` to the iOS and Mac Catalyst targets of the host. Include the host's `GoogleService-Info.plist` as a bundle resource. Firebase remains compiled into the native wrapper through the Xcode project's Swift Package dependencies; there is no separate optional Firebase runtime NuGet package. Do not assume compatibility with another independently embedded Firebase copy.
 
-See the [Apple build guide](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/src/apple/AmDEVFirebaseAnalytics/BUILDING.md) and [privacy/resource audit](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/src/apple/AmDEVFirebaseAnalytics/PRIVACY.md). The Xcode resource phase preserves the pinned dependencies' bundles; archive checks reject missing manifests. **The previously committed XCFramework has not been rebuilt and lacks these resources and wrapper dSYMs. It is not release-ready.** Regenerate and replace it on macOS before packaging.
+See the [Apple build guide](src/apple/AmDEVFirebaseAnalytics/BUILDING.md) and [privacy/resource audit](src/apple/AmDEVFirebaseAnalytics/PRIVACY.md). The checked-in XCFramework has been regenerated for iOS, iOS Simulator, and Mac Catalyst; every slice contains the wrapper privacy manifest, 17 pinned dependency resource bundles, and its dSYM. The Xcode resource phase and archive checks reject missing manifests. Final host-app, privacy-report, signing, and symbolication validation is still required before release.
 
 Signing, host privacy declarations and consent, initialization ownership, Crashlytics symbol uploads, and device/Release validation remain host/release responsibilities. Successful binding compilation alone does not establish a working Firebase app integration.
 
 ## Tests
 
-The repository includes Swift tests for the native wrapper, MSTest tests for Core and the logging bridge, and .NET test apps for Foundation and Android runtime behavior. The unit suites do not require Firebase credentials or send telemetry. See [TESTING.md](https://github.com/AMDevIT/AMDevITAnalytics/blob/Task-Apple-Library/TESTING.md) for coverage, commands, and the separate real-Firebase integration checklist. The added tests have not been executed during this change; restore and build were explicitly excluded.
+The repository includes Swift tests for the native wrapper, MSTest tests for Core and the logging bridge, and .NET test apps for Foundation and Android runtime behavior. The unit suites do not require Firebase credentials or send telemetry. See [TESTING.md](TESTING.md) for coverage, commands, and the separate real-Firebase integration checklist. Test source and project fixes are committed, but no durable test-result artifact is stored in the repository; record a fresh complete run for the release candidate.
 
 ## Repository layout
 

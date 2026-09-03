@@ -1,8 +1,8 @@
 # Testing AMDev.IT Analytics
 
-The tests added in this change have **not been executed**. The editing session explicitly
-excluded restore and build. The commands below are instructions for a later authorized run,
-not a record of successful verification.
+The test projects received follow-up compilation fixes, but the repository does not store
+a complete durable test report for every suite and platform. The commands below define the
+run that must be recorded for a release candidate; commit messages alone are not test evidence.
 
 ## Suites
 

@@ -39,8 +39,9 @@ Do not reuse a version already published to the target feed.
    `ApiDefinition.cs` and `StructsAndEnums.cs`; internal test seams must not change
    the public names/selectors. Check actual minimum OS versions in the binaries.
 4. Pass the [privacy/resource audit](src/apple/AmDEVFirebaseAnalytics/PRIVACY.md).
-   The previously committed XCFramework has no manifests, resource bundles, or dSYMs;
-   it must not be published unchanged. Run the resource verifier on each slice.
+   The checked-in XCFramework currently contains the expected manifests, resource
+   bundles, and dSYMs, but verify the artifact produced for this release candidate.
+   Run the resource verifier on each slice.
    Compare dSYM UUIDs to their matching binaries with `dwarfdump --uuid`.
 5. Restore and build the .NET solution in Release with the required Android, iOS, and
    Mac Catalyst workloads. Build each declared TFM, including plain net10.0 and
@@ -62,8 +63,8 @@ Do not reuse a version already published to the target feed.
 
 ## Restore, build, and pack
 
-The following commands are for an authorized release run from the repository root.
-They have not been executed as part of this change.
+The following commands are the reference release run from the repository root. Execute
+and record them for the release candidate; earlier development builds are not sufficient.
 
 ```powershell
 dotnet restore src/dotnet/AMDevIT.Analytics/AMDevIT.Analytics.slnx

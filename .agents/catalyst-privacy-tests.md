@@ -71,11 +71,11 @@ regeneration was performed. The user's prohibition on restore/build remains acti
 
 ## Open issues and next step
 
-The checked-in XCFramework is unchanged and still lacks privacy resources and dSYMs,
-despite DebugSymbolsPath entries in its plist. It is not release-ready. Regenerate the
-whole artifact on macOS after build authorization, preserve Catalyst symlinks and symbols,
-then validate the actual generated SPM bundle paths, Swift tests, binding/managed builds,
-platform test reports, and final Release app privacy/symbolication/upload behavior.
+Update on 2026-09-03: commit `80d0d8a` regenerated the checked-in XCFramework. Repository
+inspection now finds the expected three slices, 54 privacy manifests, 51 dependency bundles,
+and three dSYMs. The original limitation below still applies to execution evidence: validate
+the actual generated SPM bundle paths, Swift tests, binding/managed builds, platform test
+reports, and final Release app privacy/symbolication/upload behavior for the release candidate.
 
 The added tests are source-reviewed, not proven passing; there is no claim of complete
 Firebase SDK coverage or compatibility between independently embedded Firebase copies.
