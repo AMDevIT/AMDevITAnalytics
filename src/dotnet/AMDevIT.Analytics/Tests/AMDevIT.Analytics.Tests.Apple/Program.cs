@@ -5,42 +5,54 @@ namespace AMDevIT.Analytics.Tests;
 
 internal static class Program
 {
-    #region Methods
-
-    private static void Main(string[] args) => UIApplication.Main(args, null, typeof(TestAppDelegate));
-
-    #endregion
+    private static void Main(string[] args)
+        => UIApplication.Main(args, null, typeof(TestAppDelegate));
 }
 
 [Register("AnalyticsTestAppDelegate")]
 public sealed class TestAppDelegate : UIApplicationDelegate
 {
-    #region Properties
-
     public override UIWindow? Window { get; set; }
 
-    #endregion
-
-    #region Methods
-
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    public override bool FinishedLaunching(
+        UIApplication application,
+        NSDictionary? launchOptions)
     {
         UIViewController controller = new();
-        UITextView output = new(UIScreen.MainScreen.Bounds) { Editable = false, Text = "Running tests…" };
+
+        UITextView output = new(UIScreen.MainScreen.Bounds)
+        {
+            Editable = false,
+            Text = "Running tests…"
+        };
+
         controller.View = output;
-        this.Window = new UIWindow(UIScreen.MainScreen.Bounds) { RootViewController = controller };
-        this.Window.MakeKeyAndVisible();
+
+        Window = new UIWindow(UIScreen.MainScreen.Bounds)
+        {
+            RootViewController = controller
+        };
+
+        Window.MakeKeyAndVisible();
+
         _ = RunTestsAsync(output);
+
         return true;
     }
 
     private static async Task RunTestsAsync(UITextView output)
     {
         string report;
+
         try
         {
             report = await PlatformTestRunner.RunAsync<AppleTests>();
-            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "test-results.txt"), report);
+
+            File.WriteAllText(
+                Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    "test-results.txt"),
+                report);
         }
         catch (Exception exception)
         {
@@ -50,6 +62,4 @@ public sealed class TestAppDelegate : UIApplicationDelegate
         Console.WriteLine(report);
         output.Text = report;
     }
-
-    #endregion
 }

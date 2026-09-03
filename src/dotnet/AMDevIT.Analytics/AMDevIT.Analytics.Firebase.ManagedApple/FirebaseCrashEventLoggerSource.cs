@@ -183,10 +183,12 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
         {
             foreach (StackFrame frame in new StackTrace(exception, true).GetFrames() ?? [])
             {
-                MethodBase? method = frame.GetMethod();
-                string symbol = method == null
-                    ? frame.ToString()?.Trim() ?? "unknown"
-                    : $"{method.DeclaringType?.FullName ?? "unknown"}.{method.Name}";
+                // MethodBase? method = frame.GetMethod();
+                var methodInfo = DiagnosticMethodInfo.Create(frame);
+                
+                string symbol = methodInfo is not null
+                             ? $"{methodInfo.DeclaringTypeName ?? "unknown"}.{methodInfo.Name ?? "unknown"}"
+                             : frame.ToString()?.Trim() ?? "unknown";
                 string file = frame.GetFileName() ?? string.Empty;
                 int line = Math.Max(frame.GetFileLineNumber(), 0);
                 nativeFrames.Add(new CrashlyticsStackFrame(symbol, file, line));
