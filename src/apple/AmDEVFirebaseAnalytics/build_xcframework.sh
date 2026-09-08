@@ -82,6 +82,7 @@ archive_platform() {
         echo "Archive is missing the generated Objective-C header or dSYM: $archive_path" >&2
         exit 1
     fi
+    bash "$SCRIPT_DIR/verify_firebase_resources.sh" "$framework_path"
     CREATE_ARGS+=(-framework "$framework_path" -debug-symbols "$dsym_path")
 }
 
@@ -99,6 +100,10 @@ if [[ ! -f "$STAGED_FRAMEWORK/Info.plist" ]]; then
 fi
 
 # Display the actual slices; do not promise architectures unsupported by this Xcode.
+while IFS= read -r -d '' framework_path; do
+    bash "$SCRIPT_DIR/verify_firebase_resources.sh" "$framework_path"
+done < <(find "$STAGED_FRAMEWORK" -type d -name "$XCFRAMEWORK_NAME.framework" -print0)
+
 "$PLIST_BUDDY" -c 'Print :AvailableLibraries' "$STAGED_FRAMEWORK/Info.plist"
 
 # Only replace the last successful artifact after every archive and packaging step succeeds.

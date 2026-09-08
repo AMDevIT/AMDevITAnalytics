@@ -242,6 +242,9 @@ timeline.xctimeline
 playground.xcworkspace
 
 # Xcode state files
+# Native wrapper symbols must travel with the checked-in XCFramework.
+!src/dotnet/AMDevIT.Analytics/AMDevIT.Analytics.Firebase.BindingApple/libs/**/*.dSYM/
+
 *.xccheckout
 *.moved-aside
 *.xcuserstate

@@ -1,6 +1,8 @@
 <Project>
   <PropertyGroup>
-    <ArtifactsPath>$(MSBuildThisFileDirectory)..\..\..\artifacts</ArtifactsPath>
+   <!-- <ArtifactsPath>$(MSBuildThisFileDirectory)..\..\..\artifacts</ArtifactsPath> -->
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\..\artifacts\packages</PackageOutputPath>
+    <PublishDir>$(MSBuildThisFileDirectory)..\..\..\artifacts\publish\$(MSBuildProjectName)\$(TargetFramework)\$(RuntimeIdentifier)</PublishDir>
    </PropertyGroup>
 
   <PropertyGroup>
@@ -8,8 +10,8 @@
     <ImplicitUsings>true</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
-    <VersionPrefix>0.0.6</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionPrefix>0.0.33</VersionPrefix>
+    <VersionSuffix>-alpha1</VersionSuffix>
     <Version>$(VersionPrefix)$(VersionSuffix)</Version>
     <Authors>Alessandro Morvillo</Authors>
     <Company>AMDev.IT di Alessandro Morvillo</Company>

@@ -387,6 +387,7 @@ typedef SWIFT_ENUM(NSInteger, AnalyticsConsentStatus, open) {
 /// Configure Firebase before using this manager.
 SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")
 @interface AnalyticsManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Records an event using Firebase’s event-name and parameter restrictions.
 - (void)logEventWithName:(NSString * _Nonnull)name parameters:(NSDictionary<NSString *, id> * _Nullable)parameters;
 /// Associates events with an identifier, or removes it when nil.
@@ -408,7 +409,6 @@ SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")
 - (void)sessionIDWithCompletion:(void (^ _Nonnull)(NSNumber * _Nullable, NSError * _Nullable))completion;
 /// Returns the app instance identifier, or nil when unavailable.
 - (NSString * _Nullable)appInstanceID SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class CrashlyticsStackFrame;
@@ -416,6 +416,7 @@ SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")
 /// Configure Firebase before using this manager.
 SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics18CrashlyticsManager")
 @interface CrashlyticsManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Adds diagnostic context to reports; this does not record an error itself.
 - (void)logWithMessage:(NSString * _Nonnull)message;
 /// Records a non-fatal native error.
@@ -445,7 +446,6 @@ SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics18CrashlyticsManager")
 - (void)sendUnsentReports;
 /// Deletes pending local reports when automatic collection is disabled.
 - (void)deleteUnsentReports;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// A symbolicated stack frame supplied by the caller’s runtime.
@@ -867,6 +867,7 @@ typedef SWIFT_ENUM(NSInteger, AnalyticsConsentStatus, open) {
 /// Configure Firebase before using this manager.
 SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")
 @interface AnalyticsManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Records an event using Firebase’s event-name and parameter restrictions.
 - (void)logEventWithName:(NSString * _Nonnull)name parameters:(NSDictionary<NSString *, id> * _Nullable)parameters;
 /// Associates events with an identifier, or removes it when nil.
@@ -888,7 +889,6 @@ SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")
 - (void)sessionIDWithCompletion:(void (^ _Nonnull)(NSNumber * _Nullable, NSError * _Nullable))completion;
 /// Returns the app instance identifier, or nil when unavailable.
 - (NSString * _Nullable)appInstanceID SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class CrashlyticsStackFrame;
@@ -896,6 +896,7 @@ SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics16AnalyticsManager")
 /// Configure Firebase before using this manager.
 SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics18CrashlyticsManager")
 @interface CrashlyticsManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Adds diagnostic context to reports; this does not record an error itself.
 - (void)logWithMessage:(NSString * _Nonnull)message;
 /// Records a non-fatal native error.
@@ -925,7 +926,6 @@ SWIFT_CLASS("_TtC22AmDEVFirebaseAnalytics18CrashlyticsManager")
 - (void)sendUnsentReports;
 /// Deletes pending local reports when automatic collection is disabled.
 - (void)deleteUnsentReports;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// A symbolicated stack frame supplied by the caller’s runtime.

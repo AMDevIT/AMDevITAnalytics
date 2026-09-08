@@ -12,7 +12,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 {
     #region Fields
 
-    private readonly FirebaseAppleSource<CrashlyticsManager> source = new();
+    private readonly FirebaseAppleSource<IFirebaseCrashlyticsManager> source;
 
     #endregion
 
@@ -32,6 +32,20 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 
     /// <summary>Gets whether Crashlytics detected a crash during the previous execution.</summary>
     public bool DidCrashDuringPreviousExecution => this.source.Read(manager => manager.DidCrashDuringPreviousExecution);
+
+    #endregion
+
+    #region .ctor
+
+    /// <summary>Creates a lazily initialized Apple Crashlytics source.</summary>
+    public FirebaseCrashEventLoggerSource() : this(new FirebaseAppleSource<IFirebaseCrashlyticsManager>(() => new FirebaseCrashlyticsManager(), () => FirebaseApple.Initialize()))
+    {
+    }
+
+    internal FirebaseCrashEventLoggerSource(FirebaseAppleSource<IFirebaseCrashlyticsManager> source)
+    {
+        this.source = source;
+    }
 
     #endregion
 
@@ -63,7 +77,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 
             if (crashEvent.Parameters != null)
             {
-                using NSDictionary<NSString, NSObject>? parameters = FirebaseAppleParameters.Create(crashEvent.Parameters, customValues: true);
+                using NSDictionary? parameters = FirebaseAppleParameters.Create(crashEvent.Parameters, customValues: true);
                 manager.SetCustomKeysAndValues(parameters!);
             }
 
@@ -88,7 +102,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
     {
         ArgumentNullException.ThrowIfNull(error);
 
-        using NSDictionary<NSString, NSObject>? nativeUserInfo = FirebaseAppleParameters.Create(userInfo, customValues: true);
+        using NSDictionary? nativeUserInfo = FirebaseAppleParameters.Create(userInfo, customValues: true);
         this.source.Execute(manager =>
         {
             if (nativeUserInfo == null)
@@ -125,7 +139,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
     public void SetCustomKeysAndValues(IReadOnlyDictionary<string, object?> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        using NSDictionary<NSString, NSObject>? nativeValues = FirebaseAppleParameters.Create(values, customValues: true);
+        using NSDictionary? nativeValues = FirebaseAppleParameters.Create(values, customValues: true);
         this.source.Execute(manager => manager.SetCustomKeysAndValues(nativeValues!));
     }
 
@@ -147,7 +161,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
 
         this.source.Execute(manager => manager.CheckForUnsentReportsWithCompletion(available => completion.TrySetResult(available)),
                             cancellationToken);
-        return completion.Task.WaitAsync(cancellationToken);
+        return FirebaseAppleCallback.WaitAsync(completion, cancellationToken);
     }
 
     /// <summary>Requests upload of pending reports when automatic collection is disabled.</summary>
@@ -159,7 +173,7 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
     /// <summary>Releases this native manager without shutting down the shared Firebase app.</summary>
     public void Dispose() => this.source.Dispose();
 
-    private static void RecordException(CrashlyticsManager manager, Exception exception)
+    private static void RecordException(IFirebaseCrashlyticsManager manager, Exception exception)
     {
         List<CrashlyticsStackFrame> nativeFrames = [];
         string name = exception.GetType().FullName ?? exception.GetType().Name;
@@ -169,10 +183,12 @@ public sealed class FirebaseCrashEventLoggerSource : ICrashEventLoggerSource, ID
         {
             foreach (StackFrame frame in new StackTrace(exception, true).GetFrames() ?? [])
             {
-                MethodBase? method = frame.GetMethod();
-                string symbol = method == null
-                    ? frame.ToString()?.Trim() ?? "unknown"
-                    : $"{method.DeclaringType?.FullName ?? "unknown"}.{method.Name}";
+                // MethodBase? method = frame.GetMethod();
+                var methodInfo = DiagnosticMethodInfo.Create(frame);
+                
+                string symbol = methodInfo is not null
+                             ? $"{methodInfo.DeclaringTypeName ?? "unknown"}.{methodInfo.Name ?? "unknown"}"
+                             : frame.ToString()?.Trim() ?? "unknown";
                 string file = frame.GetFileName() ?? string.Empty;
                 int line = Math.Max(frame.GetFileLineNumber(), 0);
                 nativeFrames.Add(new CrashlyticsStackFrame(symbol, file, line));

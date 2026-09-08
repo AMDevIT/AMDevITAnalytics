@@ -9,11 +9,15 @@ import FirebaseCore
 
 @objc public class FirebaseCoreManager
     : NSObject {
-    
-    //MARK: Methods
-    
+
+    // MARK: - Methods
+
     /// Initializes Firebase for the application
     @objc public static func initializeFirebase() {
-        FirebaseApp.configure()
+        self.initializeFirebase(configure: { FirebaseApp.configure() })
+    }
+
+    internal static func initializeFirebase(configure: () -> Void) {
+        configure()
     }
 }

@@ -12,6 +12,20 @@
         "moduleName": "AmDEVFirebaseAnalytics"
       },
       {
+        "kind": "Import",
+        "name": "FirebaseAnalytics",
+        "printedName": "FirebaseAnalytics",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
         "kind": "TypeDecl",
         "name": "AnalyticsConsentStatus",
         "printedName": "AnalyticsConsentStatus",
@@ -300,6 +314,33 @@
         "name": "AnalyticsManager",
         "printedName": "AnalyticsManager",
         "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnalyticsManager",
+                "printedName": "AmDEVFirebaseAnalytics.AnalyticsManager",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)init",
+            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerCACycfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "overriding": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
           {
             "kind": "Function",
             "name": "logEvent",
@@ -713,32 +754,6 @@
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "AnalyticsManager",
-                "printedName": "AmDEVFirebaseAnalytics.AnalyticsManager",
-                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)AnalyticsManager(im)init",
-            "mangledName": "$s22AmDEVFirebaseAnalytics0C7ManagerCACycfc",
-            "moduleName": "AmDEVFirebaseAnalytics",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "init",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override"
-            ],
-            "init_kind": "Designated"
           }
         ],
         "declKind": "Class",
@@ -751,6 +766,7 @@
           "RawDocComment"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
         "inheritsConvenienceInitializers": true,
         "superclassNames": [
           "ObjectiveC.NSObject"
@@ -826,6 +842,20 @@
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "Import",
+        "name": "FirebaseCrashlytics",
+        "printedName": "FirebaseCrashlytics",
+        "declKind": "Import",
+        "moduleName": "AmDEVFirebaseAnalytics"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
         "moduleName": "AmDEVFirebaseAnalytics",
         "declAttributes": [
           "RawDocComment"
@@ -843,6 +873,33 @@
         "name": "CrashlyticsManager",
         "printedName": "CrashlyticsManager",
         "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CrashlyticsManager",
+                "printedName": "AmDEVFirebaseAnalytics.CrashlyticsManager",
+                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)init",
+            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerCACycfc",
+            "moduleName": "AmDEVFirebaseAnalytics",
+            "overriding": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
           {
             "kind": "Function",
             "name": "log",
@@ -1282,32 +1339,6 @@
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "CrashlyticsManager",
-                "printedName": "AmDEVFirebaseAnalytics.CrashlyticsManager",
-                "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@AmDEVFirebaseAnalytics@objc(cs)CrashlyticsManager(im)init",
-            "mangledName": "$s22AmDEVFirebaseAnalytics18CrashlyticsManagerCACycfc",
-            "moduleName": "AmDEVFirebaseAnalytics",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "init",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Override"
-            ],
-            "init_kind": "Designated"
           }
         ],
         "declKind": "Class",
@@ -1320,6 +1351,7 @@
           "RawDocComment"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
         "inheritsConvenienceInitializers": true,
         "superclassNames": [
           "ObjectiveC.NSObject"

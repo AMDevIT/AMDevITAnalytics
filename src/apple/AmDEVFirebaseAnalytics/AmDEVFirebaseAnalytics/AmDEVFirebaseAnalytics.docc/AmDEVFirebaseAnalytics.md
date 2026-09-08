@@ -1,6 +1,6 @@
 # ``AmDEVFirebaseAnalytics``
 
-An Objective-C-compatible wrapper for Firebase Analytics and Crashlytics on Apple platforms.
+The AMDev.IT Analytics Objective-C-compatible wrapper for Firebase Analytics and Crashlytics on iOS and Mac Catalyst.
 
 ## Overview
 
@@ -79,12 +79,18 @@ delivery. Deleting affects pending local reports, not reports already uploaded.
 
 The Xcode project exports the Objective-C header and enables Mac Catalyst. The build script
 archives iOS device, simulator, and Catalyst variants and packages the wrapper dSYMs.
-The deployment target remains iOS 26.5. See `BUILDING.md` beside the Xcode project for
+The wrapper deployment target is 15.6. See `BUILDING.md` beside the Xcode project for
 build and Objective Sharpie instructions, prerequisites, and output locations.
 
-Generated binding definitions still require review and integration into .NET. Native
-dependencies, resources, signing, and host Crashlytics symbol uploads must be addressed
-before distributing a NuGet package. The scripts have not been executed on macOS yet.
+The .NET binding and managed adapter target iOS and Mac Catalyst. Internal capture backends
+support Swift tests without configuring Firebase; they are not part of the Objective-C API.
+The Xcode resource phase preserves dependency bundles and privacy manifests, and archive
+checks reject missing resources. See `PRIVACY.md` for the pinned dependency audit.
+
+The previously committed XCFramework still needs regeneration with these resources and
+dSYMs. The new tests, build phase, native linking, signing, and host Crashlytics symbol
+uploads need an authorized macOS validation run. The wrapper does not install managed
+exception handlers; the root README shows the common .NET UnobservedTaskException pattern.
 
 ## References
 

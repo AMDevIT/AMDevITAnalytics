@@ -1,15 +1,15 @@
-using Foundation;
-
 namespace AMDevIT.Analytics.Firebase.ManagedApple;
 
 /// <summary>Serializes manager access, lazy initialization, and disposal.</summary>
 internal sealed class FirebaseAppleSource<TManager> : IDisposable
-    where TManager : NSObject, new()
+    where TManager : class, IDisposable
 {
     #region Fields
 
     private TManager? manager;
     private bool disposed;
+    private readonly Func<TManager> createManager;
+    private readonly Action initializeFirebase;
 
     #endregion
 
@@ -39,6 +39,16 @@ internal sealed class FirebaseAppleSource<TManager> : IDisposable
 
     #endregion
 
+    #region .ctor
+
+    internal FirebaseAppleSource(Func<TManager> createManager, Action initializeFirebase)
+    {
+        this.createManager = createManager;
+        this.initializeFirebase = initializeFirebase;
+    }
+
+    #endregion
+
     #region Methods
 
     public void Initialize(CancellationToken cancellationToken)
@@ -61,8 +71,8 @@ internal sealed class FirebaseAppleSource<TManager> : IDisposable
         {
             ObjectDisposedException.ThrowIf(this.disposed, this);
             cancellationToken.ThrowIfCancellationRequested();
-            FirebaseApple.Initialize();
-            this.manager ??= new TManager();
+            this.initializeFirebase();
+            this.manager ??= this.createManager();
             cancellationToken.ThrowIfCancellationRequested();
             return operation(this.manager);
         }

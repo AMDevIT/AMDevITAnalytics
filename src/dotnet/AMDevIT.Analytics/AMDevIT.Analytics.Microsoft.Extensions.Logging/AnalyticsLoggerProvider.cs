@@ -145,10 +145,15 @@ public sealed class AnalyticsLoggerProvider
 
             try
             {
-                await this.processingTask;
+                await this.processingTask.WaitAsync(TimeSpan.FromMilliseconds(250));
             }
             catch (OperationCanceledException)
             {
+            }
+            catch (TimeoutException)
+            {
+                // A provider may ignore cancellation; do not block application shutdown indefinitely.
+                // ProcessQueueAsync observes any eventual failure itself.
             }
         }
         finally

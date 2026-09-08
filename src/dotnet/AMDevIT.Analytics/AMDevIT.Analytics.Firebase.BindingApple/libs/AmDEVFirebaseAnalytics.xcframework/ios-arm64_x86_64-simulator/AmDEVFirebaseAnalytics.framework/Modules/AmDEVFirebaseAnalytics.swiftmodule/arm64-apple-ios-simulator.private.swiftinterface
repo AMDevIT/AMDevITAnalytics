@@ -20,7 +20,8 @@ import _SwiftConcurrencyShims
     get
   }
 }
-@_inheritsConvenienceInitializers @objc public class AnalyticsManager : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class AnalyticsManager : ObjectiveC.NSObject {
+  @objc override dynamic public init()
   @objc public func logEvent(name: Swift.String, parameters: [Swift.String : Any]? = nil)
   @objc public func setUserID(_ userID: Swift.String?)
   @objc public func setUserProperty(_ value: Swift.String?, forName name: Swift.String)
@@ -31,10 +32,10 @@ import _SwiftConcurrencyShims
   @objc public func setSessionTimeoutInterval(_ interval: Foundation.TimeInterval)
   @objc public func sessionID(completion: @escaping (Foundation.NSNumber?, Foundation.NSError?) -> Swift.Void)
   @objc public func appInstanceID() -> Swift.String?
-  @objc override dynamic public init()
   @objc deinit
 }
-@_inheritsConvenienceInitializers @objc public class CrashlyticsManager : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class CrashlyticsManager : ObjectiveC.NSObject {
+  @objc override dynamic public init()
   @objc public func log(message: Swift.String)
   @objc public func record(error: Foundation.NSError)
   @objc public func record(error: Foundation.NSError, userInfo: [Swift.String : Any]?)
@@ -48,7 +49,6 @@ import _SwiftConcurrencyShims
   @objc public func checkForUnsentReports(completion: @escaping (Swift.Bool) -> Swift.Void)
   @objc public func sendUnsentReports()
   @objc public func deleteUnsentReports()
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc final public class CrashlyticsStackFrame : ObjectiveC.NSObject {

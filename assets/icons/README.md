@@ -1,6 +1,6 @@
-# Package icons
+# AMDev.IT Analytics package icons
 
-Shared visual identity for all AMDevIT.Analytics packages: an analytics chart and signal line combined with an abstract A. The original artwork does not use third-party platform logos.
+Shared visual identity for AMDev.IT Analytics and its `AMDevIT.Analytics.*` packages: an analytics chart and signal line combined with an abstract A. The original artwork does not use third-party platform logos.
 
 | File | Purpose |
 | --- | --- |

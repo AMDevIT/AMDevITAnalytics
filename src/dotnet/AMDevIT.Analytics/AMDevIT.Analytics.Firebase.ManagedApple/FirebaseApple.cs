@@ -9,7 +9,7 @@ public static class FirebaseApple
     #region Fields
 
     internal static readonly object SyncRoot = new();
-    private static bool initialized;
+    private static readonly FirebaseAppleInitialization Initialization = new(SyncRoot);
 
     #endregion
 
@@ -25,25 +25,7 @@ public static class FirebaseApple
     /// </remarks>
     public static void Initialize(bool useExistingApp = false)
     {
-        lock (SyncRoot)
-        {
-            if (initialized)
-            {
-                return;
-            }
-
-            if (!useExistingApp)
-            {
-                if (!NSThread.IsMain)
-                {
-                    throw new InvalidOperationException("Call FirebaseApple.Initialize() on the main thread at application startup before using Firebase sources from a background thread.");
-                }
-
-                FirebaseCoreManager.InitializeFirebase();
-            }
-
-            initialized = true;
-        }
+        Initialization.Initialize(useExistingApp, NSThread.IsMain, FirebaseCoreManager.InitializeFirebase);
     }
 
     #endregion
